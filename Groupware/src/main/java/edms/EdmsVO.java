@@ -1,14 +1,31 @@
 package edms;
 
 public class EdmsVO {
-	String user_code;
-	String title;
-	String line;
-	String confirmed;
-	String doctype;
-	String content;
-	String ofile = "";
-	String sfile = "";
+	String idx; // idx
+	String user_code; // 기안자
+	String title; // 제목
+	String postdate; // 기안일
+	String lastdate; // 기안완료일
+	String line; //결재라인 유저코드로
+	String confirmed; //결재라인 상태
+	String doctype; // 문서유형
+	String content; // 문서내용
+	String ofile = ""; // 파일이름 전
+	String sfile = ""; // 파일이름 후 
+	String status;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
+	}
 	public String getUser_code() {
 		return user_code;
 	}
@@ -20,6 +37,19 @@ public class EdmsVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getPostdate() {
+		return postdate;
+	}
+	public void setPostdate(String posdate) {
+		this.postdate = posdate;
+	}
+	public String getLastdate() {
+		return lastdate;
+	}
+	public void setLastdate(String lastdate) {
+		this.lastdate = lastdate;
 	}
 	public String getLine() {
 		return line;

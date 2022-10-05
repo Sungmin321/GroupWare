@@ -17,6 +17,7 @@
 	
 	MultipartRequest multipartrequest = new MultipartRequest(request, saveDirectory, maxPostSize, encoding);
 	
+	//String user_code = session.getAttribute("user_code").toString();
 	String user_code = "200205001"; // 임시로 홍길동 코드 사용
 	String title = multipartrequest.getParameter("title"); 
 	String doctype = multipartrequest.getParameter("cate");

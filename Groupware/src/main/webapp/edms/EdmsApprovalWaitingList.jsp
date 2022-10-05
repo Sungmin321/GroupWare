@@ -5,7 +5,12 @@
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance();
 %>
 <% 
-	ArrayList<EdmsVO> edmsLists = edmsdao.getListAll();
+	//String user_code = session.getAttribute("user_code").toString();
+	
+	//임시 테스트 이한목 코드
+	String user_code = "201012002";
+	
+	ArrayList<EdmsVO> edmsLists = edmsdao.getApprovalWaitingList(user_code);
 
 %>
 <!DOCTYPE html>
@@ -15,7 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2 align="center">전자결재 List</h2>
+	<h2 align="center"><%= edmsdao.getName(user_code) %> 승인대기 List</h2>
 	<!-- 검색폼 -->
 	<form method="get">
 		<table border="1" class="table table-dark table-striped" width="90%" align="center">
@@ -51,7 +56,7 @@
 			%>
 		
 		<tr>
-			<td colspan="7" align="center">등록된 전자결재가 없습니다</td>
+			<td colspan="7" align="center">대기중인 전자결재가 없습니다</td>
 		</tr>
 		<%
 		} else {
@@ -106,7 +111,7 @@
 			<input type="hidden" name="i" value="<%= edmsLists.size()-i %>"/>
 			 -->
 			</td>
-			<td align="left"><a href="EdmsView.jsp?idx=<%=evo.getIdx()%>&i=<%=edmsLists.size()-i%>"><%=evo.getTitle()%></a></td>
+			<td align="left"><a href="EdmsApprovalWaitingView.jsp?idx=<%=evo.getIdx()%>&i=<%=edmsLists.size()-i%>"><%=evo.getTitle()%></a></td>
 			<td align="center"><%=edmsdao.getName(evo.getUser_code())%></td>
 			<td align="center"><%= doctypekr %></td>
 			<td align="center"><%=evo.getPostdate()%></td>
