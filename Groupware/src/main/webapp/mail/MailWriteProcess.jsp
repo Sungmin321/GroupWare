@@ -104,9 +104,11 @@ if(submitValue.equals("보내기") && status == 1 && content != null){
 }
 
 if(result == 1){
-	if(status == 1){
+	if(submitValue.equals("보내기")){
 		status = 2; // 보낸메일함으로 가기 위해 status 2로 변경
-	}
+	}else if(submitValue.equals("임시저장")){
+		status = 4; // 임시보관함으로 가기 위해 status 4로 변경
+	}	
 	request.setAttribute("status", status);
 	request.setAttribute("submitValue", submitValue);
 }else{

@@ -132,7 +132,17 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="content" style="width: 100%; height: 300px;"><%= vo.getContent() %></textarea>
+<%
+	if(vo.getContent() != null){
+%>
+				<textarea name="content" style="width: 100%; height: 300px;"><%= vo.getContent().replace("\r\n", "<br/>") %></textarea>
+<%
+	}else{
+%>
+				<textarea name="content" style="width: 100%; height: 300px;"></textarea>
+<%
+	}
+%>			
 			</td>
 		</tr>
 	</table>
