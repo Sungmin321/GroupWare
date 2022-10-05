@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>GroupWare</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>OracleDriver</param-name>
+    <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleURL</param-name>
+    <param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OracleId</param-name>
+    <param-value>c##green</param-value>
+  </context-param>
+  <context-param>
+    <param-name>OraclePwd</param-name>
+    <param-value>green1234</param-value>
+  </context-param>
+  
+        <servlet>
+  <!-- 서블릿을 불러오기 위해 WAS에게 주는 정보 -->
+  <!-- 1. 배포할 Servlet 2. 해당 Servlet 매핑 URL -->
+      <servlet-name>UserSearchServlet</servlet-name>
+      <servlet-class>myServlet.UserSearchServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>UserSearchServlet</servlet-name>
+      <url-pattern>/UserSearchServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
