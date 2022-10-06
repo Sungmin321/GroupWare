@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder" %>
 <%@page import="attachedfile.AttachedFileVO"%>
 <%@page import="attachedfile.AttachedFileDAO"%>
 <%@page import="mail.MailVO"%>
@@ -63,7 +64,8 @@ if(fVo.getOfile() != null){
 %>
 			<tr align="center">
 				<td>첨부파일</td>
-				<td colspan="3" align="left"><%= fVo.getOfile() %></td>
+<%-- 				<td colspan="3" align="left"><%= fVo.getOfile() %></td> --%>
+				<td colspan="3" align="left"><a href="../attachedfile/Download.jsp?oName=<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %></a></td>
 			</tr>
 <%
 }
