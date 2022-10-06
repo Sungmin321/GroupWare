@@ -26,6 +26,11 @@ function setStatus(num){
 
 	<h2>로그인 성공(이후 메인 페이지로 변경될 페이지)</h2>
 	<%= session.getAttribute("user_name") %> 회원님, 로그인하셨습니다.<br/>
+	
+	<%= session.getAttribute("dept_name_kor") %><br/>
+	<%= session.getAttribute("pos_name_kor") %><br/>
+	<%= session.getAttribute("res_name_kor") %><br/>
+	
 	<a href="Logout.jsp">[Logout]</a>
 	
 <!-- 	메뉴를 대신할 버튼 -->

@@ -11,10 +11,41 @@ public class UserInfoDAO extends DBConnPool {
 		super();
 	}
 	
-	public UserInfoVO getUserInfoVO(String user_id, String user_pw) {
-		UserInfoVO vo = new UserInfoVO();
+//	public UserInfoVO getUserInfoVO(String user_id, String user_pw) {
+//		UserInfoVO vo = new UserInfoVO();
+//		
+//		String query = "SELECT * FROM userinfo WHERE user_id=? AND user_pw=?";
+//		
+//		try {
+//			psmt = con.prepareStatement(query);
+//			psmt.setString(1, user_id);
+//			psmt.setString(2, user_pw);
+//			rs = psmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				vo.setUser_code(rs.getInt("user_code"));
+//				vo.setUser_name(rs.getString("user_name"));
+//				vo.setUser_id(rs.getString("user_id"));
+//				vo.setUser_pw(rs.getString("user_pw"));
+//				vo.setDept_id(rs.getInt("dept_id"));
+//				vo.setPos_id(rs.getInt("pos_id"));
+//				vo.setRes_id(rs.getInt("res_id"));
+//			}
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return vo;
+//	}
+	
+	public UserInfoKorVO getUserInfoVO(String user_id, String user_pw) {
+		UserInfoKorVO vo = new UserInfoKorVO();
 		
-		String query = "SELECT * FROM userinfo WHERE user_id=? AND user_pw=?";
+		String query = "SELECT u.USER_CODE, u.USER_NAME, u.USER_ID, u.USER_PW,"
+				+ " d.DEPT_NAME_KOR, j.POS_NAME_KOR, r.RES_NAME_KOR"
+				+ " FROM USERINFO u , DEPARTMENT2 d , JOBPOSITION j , RESPONSIBILITY r"
+				+ " WHERE u.DEPT_ID = d.DEPT_ID AND u.POS_ID = j.POS_ID AND u.RES_ID = r.RES_ID(+)"
+				+ " AND u.user_id=? AND user_pw=?";
 		
 		try {
 			psmt = con.prepareStatement(query);
@@ -27,9 +58,9 @@ public class UserInfoDAO extends DBConnPool {
 				vo.setUser_name(rs.getString("user_name"));
 				vo.setUser_id(rs.getString("user_id"));
 				vo.setUser_pw(rs.getString("user_pw"));
-				vo.setDept_id(rs.getInt("dept_id"));
-				vo.setPos_id(rs.getInt("pos_id"));
-				vo.setRes_id(rs.getInt("res_id"));
+				vo.setDept_name_kor(rs.getString("dept_name_kor"));
+				vo.setPos_name_kor(rs.getString("pos_name_kor"));
+				vo.setRes_name_kor(rs.getString("res_name_kor"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
