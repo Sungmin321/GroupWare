@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
@@ -126,3 +127,4 @@
 	</table>
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>

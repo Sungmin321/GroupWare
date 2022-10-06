@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@page import="userinfo.UserInfoKorVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -133,3 +134,4 @@ if(list.isEmpty()){
 	
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>

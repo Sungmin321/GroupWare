@@ -14,7 +14,7 @@ String idx = request.getParameter("idx");
 
 int result = edmsdao.updateReferConfirmed(user_code, idx);
 
-if (result==1){
+if (result>0){
 	%> 
 	<script type="text/javascript">
 	alert('반려 완료');

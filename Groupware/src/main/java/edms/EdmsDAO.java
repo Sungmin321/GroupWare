@@ -186,6 +186,25 @@ public class EdmsDAO extends DBConnPool {
 
 		return idx;
 	}
+	
+	public int getJobposnum (String user_code) { // pos_number (직위코드) 값 가져오기.
+		int idx = 0;
+		String query = "SELECT POS_ID FROM USERINFO u WHERE USER_CODE = "+user_code;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			rs.next();
+			
+			idx = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return idx;
+	}
 
 	public ArrayList<EdmsVO> getListAll() {
 		ArrayList<EdmsVO> list = new ArrayList<EdmsVO>();

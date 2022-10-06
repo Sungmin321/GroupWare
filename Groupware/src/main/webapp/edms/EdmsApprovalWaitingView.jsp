@@ -1,12 +1,18 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="edms.*" %>
+<%@ page import="attachedfile.*" %>
+<%@ page import="java.net.URLEncoder" %>
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance(); %>
 <% 
-String idx = request.getParameter("idx"); // 게시물 찾아올때 쓸 idx 
-String number = request.getParameter("i"); // 글번호
-
+	String idx = request.getParameter("idx"); // 게시물 찾아올때 쓸 idx 
+	String number = request.getParameter("i"); // 글번호
+	
+	AttachedFileDAO dao = new AttachedFileDAO();
+	AttachedFileVO fVo = dao.selectView(Integer.parseInt(idx));
+	
 	EdmsVO evo = edmsdao.viewEdms(idx); //idx로 정보 찾아오고
 //	EdmsVO evo = edmsdao.viewEdms("40"); //임시 정보
 	String statuskr = "";
@@ -94,7 +100,9 @@ case "3" :
 		%>
 		<tr>
 			<th>첨부파일</th>
-			<td></td>
+			<td><a href="../attachedfile/Download.jsp?oName=
+			<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %>
+			</a></td>
 		</tr>
 	</table>
 	<table border="1" width="90%" align="center">
@@ -160,3 +168,4 @@ case "3" :
 	</table>
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>
