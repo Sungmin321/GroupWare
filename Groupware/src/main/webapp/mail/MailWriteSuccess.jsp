@@ -4,6 +4,7 @@
 request.setCharacterEncoding("utf-8");
 
 String status = request.getAttribute("status").toString();
+String idx = request.getAttribute("idx").toString();
 %>
 <!DOCTYPE html>
 <html>
@@ -35,11 +36,13 @@ if(status.equals("2")){
 	
 	<form name="frm1" method="post" onsubmit="return changeSubmitValue(this);">
 		<input type="hidden" id="status1" name="status" value="<%= request.getAttribute("status").toString() %>"/>
+		<input type="hidden" id="idx1" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
 		<input type="hidden" id="submitValue1" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit1" name="submitName" value="받은메일함으로 이동"/>
 	</form>
 	<form name="frm2" method="post" onsubmit="return changeSubmitValue(this);">
 		<input type="hidden" id="status2" name="status" value="<%= request.getAttribute("status").toString() %>"/>
+		<input type="hidden" id="idx2" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
 		<input type="hidden" id="submitValue2" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit2" name="submitName" value="메일쓰기"/>
 	</form>
@@ -51,11 +54,13 @@ if(status.equals("2")){
 
 	<form name="frm3" method="post" onsubmit="return changeSubmitValue(this);">
 		<input type="hidden" id="status3" name="status" value="<%= request.getAttribute("status").toString() %>"/>
+		<input type="hidden" id="idx3" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
 		<input type="hidden" id="submitValue3" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit3" name="submitName" value="임시보관함으로 이동"/>
 	</form>
 	<form name="frm4" method="post" onsubmit="return changeSubmitValue(this);">
 		<input type="hidden" id="status4" name="status" value="<%= request.getAttribute("status").toString() %>"/>
+		<input type="hidden" id="idx4" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
 		<input type="hidden" id="submitValue4" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit4" name="submitName" value="쓰던 페이지 가기"/>
 	</form>

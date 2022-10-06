@@ -115,7 +115,7 @@ public class MailDAO extends DBConnPool{
 		return vo;
 	}
 	
-	public int getFileIdx(){
+	public int getLastIdx(){
 		int result = 0;
 		
 		String query = "SELECT idx FROM mail ORDER BY idx DESC";
@@ -188,8 +188,15 @@ public class MailDAO extends DBConnPool{
 	public int update(MailVO vo) {
 		int result = 0;
 		
+//		System.out.println("dao title : " + vo.getTitle());
+//		System.out.println("dao content : " + vo.getContent());
+//		System.out.println("dao status : " + vo.getStatus());
+//		System.out.println("dao sender : " + vo.getSender());
+//		System.out.println("dao recipients : " + vo.getRecipients());
+//		System.out.println("dao idx : " + vo.getIdx());
+		
 		String query = "UPDATE mail"
-				+ " SET title=?, content=? status=?, senddate=SYSDATE, sender=?, recipients=?"
+				+ " SET title=?, content=?, status=?, senddate=SYSDATE, sender=?, recipients=?"
 				+ " WHERE idx=?";
 		
 		try {
@@ -202,6 +209,8 @@ public class MailDAO extends DBConnPool{
 			psmt.setString(5, vo.getRecipients());
 			psmt.setInt(6, vo.getIdx());
 			
+//			System.out.println(query);
+			
 			result = psmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -213,24 +222,65 @@ public class MailDAO extends DBConnPool{
 	public int updateContentNull(MailVO vo) {
 		int result = 0;
 		
-		String query = "UPDATE mail"
-				+ " SET title=?, status=?, senddate=SYSDATE, sender=?, recipients=?"
-				+ " WHERE idx=?";
+		String query = "";
+		
+		if(vo.getContent().equals("")) {
+			query = "UPDATE mail"
+					+ " SET title=?, content=?, status=?, senddate=SYSDATE, sender=?, recipients=?"
+					+ " WHERE idx=?";
+		}else {
+			query = "UPDATE mail"
+					+ " SET title=?, status=?, senddate=SYSDATE, sender=?, recipients=?"
+					+ " WHERE idx=?";
+		}
+		
 		
 		try {
 			psmt = con.prepareStatement(query);
+
+			if(vo.getContent().equals("")) {
+				psmt.setString(1, vo.getTitle());
+				psmt.setString(2, vo.getContent());
+				psmt.setInt(3, vo.getStatus());
+				psmt.setString(4, vo.getSender());
+				psmt.setString(5, vo.getRecipients());
+				psmt.setInt(6, vo.getIdx());
+			}else {
+				psmt.setString(1, vo.getTitle());
+				psmt.setInt(2, vo.getStatus());
+				psmt.setString(3, vo.getSender());
+				psmt.setString(4, vo.getRecipients());
+				psmt.setInt(5, vo.getIdx());
+			}
 			
-			psmt.setString(1, vo.getTitle());
-			psmt.setInt(2, vo.getStatus());
-			psmt.setString(3, vo.getSender());
-			psmt.setString(4, vo.getRecipients());
-			psmt.setInt(5, vo.getIdx());
 			
 			result = psmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+	
+	public int updateStatus(int status, int idx) {
+		int result = 0;
+		
+		String query = "UPDATE mail"
+				+ " SET status=?"
+				+ " WHERE idx=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			
+			psmt.setInt(1, status);
+			psmt.setInt(2, idx);
+			
+			result = psmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 }

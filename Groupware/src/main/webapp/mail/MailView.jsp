@@ -13,10 +13,19 @@ String status = request.getParameter("status");
 
 MailDAO dao = new MailDAO();
 MailVO vo = dao.selectView(idx);
+
+if(vo.getStatus() == 1){
+	dao.updateStatus(2, idx); // 안 읽은 메일(status : 1) -> 읽은 메일(status : 2)로 변경
+}
+
 dao.close();
 
 AttachedFileDAO fDao = new AttachedFileDAO();
-AttachedFileVO fVo = fDao.selecView(idx);
+AttachedFileVO fVo = fDao.selectView(idx);
+
+System.out.println("idx : " + idx);
+System.out.println("fVo.getOfile() : " + fVo.getOfile());
+
 fDao.close();
 %>
 <!DOCTYPE html>

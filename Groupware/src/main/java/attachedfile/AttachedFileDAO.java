@@ -1,7 +1,5 @@
 package attachedfile;
 
-import java.sql.Date;
-
 import dbcon.DBConnPool;
 
 public class AttachedFileDAO extends DBConnPool {
@@ -9,7 +7,7 @@ public class AttachedFileDAO extends DBConnPool {
 		super();
 	}
 	
-	public AttachedFileVO selecView(int idx) {
+	public AttachedFileVO selectView(int idx) {
 		AttachedFileVO vo = new AttachedFileVO();
 		
 		String query = "SELECT * FROM attachedfile"
@@ -56,4 +54,43 @@ public class AttachedFileDAO extends DBConnPool {
 		return result;
 	}
 	
+	public int update(AttachedFileVO vo) {
+		int result = 0;
+		
+		String query = "UPDATE attachedfile"
+				+ " SET ofile=?, sfile=?, postdate=SYSDATE"
+				+ " WHERE idx=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			
+			psmt.setString(1, vo.getOfile());
+			psmt.setString(2, vo.getSfile());
+			psmt.setInt(3, vo.getIdx());
+			
+			result = psmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int delete(int idx) {
+		int result = 0;
+		
+		String query = "DELETE FROM attachedfile"
+				+ " WHERE idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			
+			psmt.setInt(1, idx);
+			
+			result = psmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result; 
+	}
 }

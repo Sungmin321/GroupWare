@@ -1,3 +1,5 @@
+<%@page import="attachedfile.AttachedFileVO"%>
+<%@page import="attachedfile.AttachedFileDAO"%>
 <%@page import="userinfo.UserInfoDAO"%>
 <%@page import="userinfo.UserInfoVO"%>
 <%@page import="mail.MailVO"%>
@@ -9,7 +11,30 @@
 request.setCharacterEncoding("utf-8");
 
 int status = Integer.parseInt(request.getParameter("status"));
-%>    
+System.out.println("write 페이지 14행 status : " + status);
+
+// status == 1
+String user_id = session.getAttribute("user_id").toString();
+UserInfoDAO uDao = new UserInfoDAO();
+UserInfoVO uVo = uDao.getUserInfoVO(user_id);
+int user_code = uVo.getUser_code();
+
+// status == 4
+int idx = 0;
+if(status == 4){
+	idx = Integer.parseInt(request.getParameter("idx"));
+}
+MailDAO dao = new MailDAO();	
+MailVO vo = dao.selectView(idx);
+
+AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileVO fVo = fDao.selectView(idx);
+
+System.out.println("write 페이지 31행 idx : " + idx);
+System.out.println("write 페이지 32행 fVo.getOfile() : " + fVo.getOfile());
+
+fDao.close();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +42,29 @@ int status = Integer.parseInt(request.getParameter("status"));
 <title>메일쓰기</title>
 </head>
 <body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var status = <%=request.getParameter("status")%>;
+	var fileName = "<%=fVo.getOfile()%>";
+	
+	if(status == 4 && fileName != null && fileName != "null"){
+		console.log("if문 실행");
+		$('#attachedFile').hide();
+		$('#deleteFileBtn').hide();
+	}
+};
+
+function btn_click(){
+	$('#upload_btn').hide();
+	$('#fileName').hide();
+	$('#delete_btn').hide();
+	$('#attachedFile').show();
+	$('#deleteFileBtn').show();
+	document.getElementById("attachedFile").value = "아무 의미 없는 값";
+};
+</script>
 
 <script>
 function validateForm(form){
@@ -41,6 +89,11 @@ function validateForm(form){
 function deleteFile(){
 	document.getElementById("attachedFile").value = "";
 };
+
+function delete_btn_click(){
+	document.getElementById("fileName").value = "";
+};
+
 </script>
 
 	<h2>메일쓰기</h2>
@@ -51,19 +104,19 @@ function deleteFile(){
 		<tr>
 			<td>
 				<input type="hidden" name="statusValue" value="<%= request.getParameter("status") %>"/>
+				<input type="hidden" name="idxValue" value="<%= request.getParameter("idx")%>"/>
 				<input type="submit" name="submitValue" value="보내기"/>
 				<input type="submit" name="submitValue" value="임시저장"/>
 			</td>
 		</tr>
 	</table>
 	
-	
 <%
 if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성하는 경우
-	String user_id = session.getAttribute("user_id").toString();
-	UserInfoDAO uDao = new UserInfoDAO();
-	UserInfoVO uVo = uDao.getUserInfoVO(user_id);
-	int user_code = uVo.getUser_code();
+// 	String user_id = session.getAttribute("user_id").toString();
+// 	UserInfoDAO uDao = new UserInfoDAO();
+// 	UserInfoVO uVo = uDao.getUserInfoVO(user_id);
+// 	int user_code = uVo.getUser_code();
 %>
 	<table border="1" width="90%">
 		<tr>
@@ -98,11 +151,19 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 		</tr>
 	</table>
 <%
-}else if(status == 4){ // 임시보관함에서 상세보기로 넘어온 경우
-	int idx = Integer.parseInt(request.getParameter("idx"));
-	MailDAO dao = new MailDAO();	
-	MailVO vo = dao.selectView(idx);
-	dao.close();
+}else if(status == 4){ // 임시보관함에서 메일보기로 넘어온 경우
+// 	int idx = Integer.parseInt(request.getParameter("idx"));
+// 	MailDAO dao = new MailDAO();	
+// 	MailVO vo = dao.selectView(idx);
+// 	dao.close();
+	
+// 	AttachedFileDAO fDao = new AttachedFileDAO();
+// 	AttachedFileVO fVo = fDao.selectView(idx);
+
+// 	System.out.println("write 페이지 137행 idx : " + idx);
+// 	System.out.println("fVo.getOfile() : " + fVo.getOfile());
+
+// 	fDao.close();
 %>
 	<table border="1" width="90%">
 		<tr>
@@ -126,6 +187,15 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 		<tr>
 			<td width="15%">첨부파일</td>
 			<td>
+<%
+	if(fVo.getOfile() != null){
+%>
+				<input type="button" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
+				<input type="button" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
+				<input type="text" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
+<%
+	}
+%>
 				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
 				<Button type="button" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
 			</td>
@@ -142,7 +212,7 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 				<textarea name="content" style="width: 100%; height: 300px;"></textarea>
 <%
 	}
-%>			
+%>
 			</td>
 		</tr>
 	</table>
