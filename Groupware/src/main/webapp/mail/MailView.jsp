@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@page import="java.net.URLEncoder" %>
 <%@page import="attachedfile.AttachedFileVO"%>
 <%@page import="attachedfile.AttachedFileDAO"%>
@@ -88,3 +89,4 @@ if(vo.getContent() != null){
 	</form>
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>

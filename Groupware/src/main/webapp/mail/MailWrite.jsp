@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@page import="attachedfile.AttachedFileVO"%>
 <%@page import="attachedfile.AttachedFileDAO"%>
 <%@page import="userinfo.UserInfoDAO"%>
@@ -223,3 +224,4 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>

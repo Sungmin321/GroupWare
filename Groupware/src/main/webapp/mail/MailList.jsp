@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@page import="userinfo.UserInfoVO"%>
 <%@page import="userinfo.UserInfoDAO"%>
 <%@page import="mail.MailVO"%>
@@ -180,3 +181,4 @@ if(list.isEmpty()){
 	</table>
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>
