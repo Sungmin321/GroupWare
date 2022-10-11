@@ -263,10 +263,12 @@ public class EdmsDAO extends DBConnPool {
 					// System.out.println("confirmeds : "+confirmeds[i]);
 					// System.out.println("codes : "+codes[i]);
 					// System.out.println("user_code : "+user_code);
-					if (confirmeds[i].equals("1") && codes[i].equals(user_code)) {
-						System.out.println("승인대기 게시물 : true");
+					if (confirmeds[i].equals("1") && codes[i].equals(user_code)) { // 유저코드랑 결재상태가 1인 것 [뒤에서 부터 봄 (아랫결제라인)] true 조건
+						System.out.println("승인대기 게시물 idx : " +  rs.getString(3));
 						flag = true;
 						// flag를 true로 바꾸고 for문을 나와라.
+						break;
+					}else if (confirmeds[i].equals("1")) { // 유저코드랑 결재상태가 1이 아니라서 다음으로 넘어왓는데 결재상태는 1이다 ? -> 아랫사람이 결재를 안한거. 이 게시물은 pass
 						break;
 					}
 

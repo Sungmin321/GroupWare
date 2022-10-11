@@ -97,6 +97,7 @@ case "3" :
 				<%
 			}
 		%>
+		<% if(fVo.getOfile() != null) { %>
 		<tr>
 			<th>첨부파일</th>
 			<td>
@@ -105,6 +106,14 @@ case "3" :
 			</a>
 			</td>
 		</tr>
+		<% }else { %>
+		<tr>
+			<th>첨부파일</th>
+			<td>
+			첨부 된 파일이 없습니다.
+			</td>
+		</tr>
+		<% } %>
 	</table>
 	<table border="1" width="90%" align="center">
 		<tr>
