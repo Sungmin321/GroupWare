@@ -27,9 +27,10 @@
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span class="item">전자메일</span>
                           <a class="sub_1" href="/Groupware/mail/MailWrite.jsp?status=1" style="font-size: 12px"><i class="fas fa-edit"></i>&nbsp;메일쓰기</a>
-                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=2" style="font-size: 12px"><i class="fas fa-envelope-open"></i>&nbsp;메일함</a>
-                      	  <a class="sub_1" href="#" style="font-size: 12px"><i class="fas fa-share"></i>&nbsp;보낸메일함</a>
-                      	  <a class="sub_1" href="#" style="font-size: 12px"><i class="fas fa-trash"></i>&nbsp;휴지통</a>
+                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=2" style="font-size: 12px"><i class="fas fa-envelope-open"></i>&nbsp;받은메일함</a>
+                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=3" style="font-size: 12px"><i class="fas fa-share"></i>&nbsp;보낸메일함</a>
+                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=4" style="font-size: 12px"><i class="fas fa-share"></i>&nbsp;임시보관함</a>
+                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=5" style="font-size: 12px"><i class="fas fa-trash"></i>&nbsp;휴지통</a>
                     </a>
                 </li>
 

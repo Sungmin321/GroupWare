@@ -6,10 +6,10 @@
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance();
 %>
 <% 
-	//String user_code = session.getAttribute("user_code").toString();
+	String user_code = session.getAttribute("user_code").toString();
 	
 	//임시 테스트 이한목 코드
-	String user_code = "201012002";
+	//String user_code = "201012002";
 	
 	ArrayList<EdmsVO> edmsLists = edmsdao.getApprovalWaitingList(user_code);
 
