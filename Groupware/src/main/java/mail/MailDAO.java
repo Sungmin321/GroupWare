@@ -26,7 +26,7 @@ public class MailDAO extends DBConnPool{
 //		System.out.println(status);
 		
 		if(status.equals("2")) { // 받은메일함
-			query += " AND status >= 1 AND status <= ?"
+			query += " AND MOD(status,10) >= 1 AND MOD(status,10) <= ?"
 					+ " AND recipients LIKE '%" + user_code + "%'";
 			if(map.get("searchWord") != null) {
 				query += " AND " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -34,7 +34,7 @@ public class MailDAO extends DBConnPool{
 			query += " ORDER BY status, idx DESC";
 			
 		}else if(status.equals("3") || status.equals("4")) { // 보낸메일함, 임시보관함
-			query += " AND status = ?" 
+			query += " AND MOD(status,10) = ?" 
 					+ " AND sender = '" + user_code + "'";
 			if (map.get("searchWord") != null) {
 				query += " AND " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -42,15 +42,18 @@ public class MailDAO extends DBConnPool{
 			query += " ORDER BY idx DESC";
 
 		} else if (status.equals("5")) { // 휴지통
-			query += " AND status = ?" 
-					+ " AND (sender = '" + user_code + "' OR recipients LIKE '%" + user_code + "%')";
+			query += " AND ("
+					+ " (status = ? AND sender = '" + user_code + "')"
+					+ " OR"
+					+ " (MOD(status,10) = " + status + " AND floor(status/10) >= 3 AND sender = '" + user_code + "')"
+					+ " OR"
+					+ " (MOD(status,10) = " + status + " AND recipients LIKE '%" + user_code + "%')"
+					+ " )";
 			if (map.get("searchWord") != null) {
 				query += " AND " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
 			}
 			query += " ORDER BY idx DESC";
-
 		}
-		
 //		System.out.println(query);
 		
 		try{
@@ -113,6 +116,30 @@ public class MailDAO extends DBConnPool{
 		}
 		
 		return vo;
+	}
+	
+	public int getStatus(int idx) {
+		int status = 0;
+		
+		String query = "SELECT status FROM mail"
+				+ " WHERE idx=?";
+		
+		System.out.println("MailDAo idx : " + idx);
+		System.out.println("MailDAO query : " + query);
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, idx);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				status = rs.getInt("status");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return status;
 	}
 	
 	public int getLastIdx(){
@@ -283,4 +310,20 @@ public class MailDAO extends DBConnPool{
 		
 		return result;
 	}
+	
+	public int delete(int idx) {
+		int result = 0;
+		String query = "DELETE from mail"
+				+ " WHERE idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, idx);
+			
+			result = psmt.executeUpdate();
+		}catch(Exception e) {
+			
+		}
+		return result;
+	}
+	
 }

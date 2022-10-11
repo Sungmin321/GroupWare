@@ -1,3 +1,4 @@
+<%@ include file="../Sidebar1.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -41,7 +42,7 @@ if(status.equals("2")){
 		<input type="submit" id="submit1" name="submitName" value="받은메일함으로 이동"/>
 	</form>
 	<form name="frm2" method="post" onsubmit="return changeSubmitValue(this);">
-		<input type="hidden" id="status2" name="status" value="<%= request.getAttribute("status").toString() %>"/>
+		<input type="hidden" id="status2" name="status" value="1"/>
 		<input type="hidden" id="idx2" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
 		<input type="hidden" id="submitValue2" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit2" name="submitName" value="메일쓰기"/>
@@ -60,7 +61,7 @@ if(status.equals("2")){
 	</form>
 	<form name="frm4" method="post" onsubmit="return changeSubmitValue(this);">
 		<input type="hidden" id="status4" name="status" value="<%= request.getAttribute("status").toString() %>"/>
-		<input type="hidden" id="idx4" name="idx" value="<%= request.getAttribute("idx").toString() %>"/>
+		<input type="hidden" id="idx4" name="idx" value="<%= request.getAttribute("idx4").toString() %>"/>
 		<input type="hidden" id="submitValue4" name="submitValue" value="<%= request.getAttribute("submitValue").toString() %>"/>
 		<input type="submit" id="submit4" name="submitName" value="쓰던 페이지 가기"/>
 	</form>
@@ -69,3 +70,4 @@ if(status.equals("2")){
 %>
 </body>
 </html>
+<%@ include file="../Sidebar2.jsp" %>

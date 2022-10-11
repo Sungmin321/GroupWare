@@ -31,9 +31,6 @@ MailVO vo = dao.selectView(idx);
 AttachedFileDAO fDao = new AttachedFileDAO();
 AttachedFileVO fVo = fDao.selectView(idx);
 
-System.out.println("write 페이지 31행 idx : " + idx);
-System.out.println("write 페이지 32행 fVo.getOfile() : " + fVo.getOfile());
-
 fDao.close();
 %>
 <!DOCTYPE html>

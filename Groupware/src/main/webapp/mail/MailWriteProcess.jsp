@@ -284,10 +284,11 @@ if(submitValue.equals("보내기")){
 	status = 4; // 임시보관함으로 가기 위해 status 4로 변경
 }
 request.setAttribute("idx", idxValue);
+request.setAttribute("idx4", idx4);
 request.setAttribute("status", status);
 request.setAttribute("submitValue", submitValue);
 
-System.out.println("Process Page Changed status : " + status);
+// System.out.println("Process Page Changed status : " + status);
 
 
 if (ofile == null) { // 첨부파일이 없는 경우

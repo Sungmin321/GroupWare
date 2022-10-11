@@ -16,8 +16,12 @@ String status = request.getParameter("status");
 MailDAO dao = new MailDAO();
 MailVO vo = dao.selectView(idx);
 
+// System.out.println("View.jsp의 status : " + status);
+
 if(vo.getStatus() == 1){
 	dao.updateStatus(2, idx); // 안 읽은 메일(status : 1) -> 읽은 메일(status : 2)로 변경
+}else if(vo.getStatus() / 10 == 1 && vo.getStatus() % 10 == 5){
+	dao.updateStatus(25, idx); // 휴지통 안 읽은 메일(status : 15) -> 휴지통 읽은 메일(status : 25)로 변경
 }
 
 dao.close();

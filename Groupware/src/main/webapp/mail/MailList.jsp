@@ -92,8 +92,69 @@ $(document).on('click','input:checkbox[name="check[]"]',function(){
 	}
 });
 
-</script>
+function delete_btn(){
+	var obj = $('input[name="check[]"]');
+	var chkArr = new Array();
+	$('input:checkbox[name="check[]"]:checked').each(function(){
+		chkArr.push(this.value);
+	});
+	$('#chk_value').val(chkArr);
+	var status = <%= request.getParameter("status") %>;
+	btn_frm.action = "MailDeleteBtnProcess.jsp";
+	btn_frm.submit();
+};
 
+function restore_btn(){
+	var obj = $('input[name="check[]"]');
+	var chkArr = new Array();
+	$('input:checkbox[name="check[]"]:checked').each(function(){
+		chkArr.push(this.value);
+	});
+	$('#chk_value').val(chkArr);
+	var status = <%= request.getParameter("status") %>;
+	btn_frm.action = "MailRestoreBtnProcess.jsp";
+	btn_frm.submit();
+};
+
+function permanentlyDelete_btn(){
+	var confirmed = confirm("선택된 메일을 완전히 삭제하시겠습니까?\n영구 삭제되어 복구할 수 없습니다.");
+	if(confirmed){
+		var obj = $('input[name="check[]"]');
+		var chkArr = new Array();
+		$('input:checkbox[name="check[]"]:checked').each(function(){
+			chkArr.push(this.value);
+		});
+		$('#chk_value').val(chkArr);
+		var status = <%= request.getParameter("status") %>;
+		btn_frm.action = "MailpermanentlyDeleteBtnProcess.jsp";
+		btn_frm.submit();
+	}
+};
+
+
+</script>
+<%
+if(status.equals("2")){
+%>
+	<h2>받은메일함</h2>
+<%
+}else if(status.equals("3")){
+%>
+	<h2>보낸메일함</h2>
+<%
+}else if(status.equals("4")){
+%>
+	<h2>임시보관함</h2>
+<%
+}else if(status.equals("5")){
+%>
+	<h2>휴지통</h2>
+<%
+}
+%>
+	<form method="get" name="btn_frm">
+	<input type="hidden" name="status" value="<%=request.getParameter("status")%>"/>
+	<input type="hidden" id="chk_value" name="chk_value"/>
 	<table width="90%">
 		<tr>
 			<td>
@@ -103,20 +164,21 @@ $(document).on('click','input:checkbox[name="check[]"]',function(){
 // if(status == 2 || status == 3 || status == 4){
 if(status.equals("2") || status.equals("3") || status.equals("4")){
 %>
-				<button type="button" onclick="">삭제</button>
+				<button type="button" onclick="delete_btn();">삭제</button>
 <%
 }
 // if(status == 5){
 if(status.equals("5")){
 %>
-				<button type="button" onclick="">완전삭제</button>
-				<button type="button" onclick="">복원</button>
+				<button type="button" onclick="permanentlyDelete_btn();">완전삭제</button>
+				<button type="button" onclick="restore_btn();">복원</button>
 <%
 }
 %>
 			</td>
 		</tr>
 	</table>
+	</form>
 	
 	<form method="get">
 	<table border="1" width="90%">
@@ -158,7 +220,7 @@ if(list.isEmpty()){
 %>		
 		<tr>
 			<td align="center">
-				<input type="checkbox" name="check[]"/>
+				<input type="checkbox" name="check[]" value="<%= vo.getIdx() %>"/>
 			</td>
 			<td align="center"><%= vo.getUser_name() %><<%= vo.getSender() %>></td>
 <%
