@@ -4,8 +4,8 @@
         <div class="sidebar">
             <div class="profile">
                 <img src="https://yt3.ggpht.com/ytc/AMLnZu-7OpiH7MOmo-4njrAr2L0OmJVF7j7dBJLvdcFHnQ=s900-c-k-c0x00ffffff-no-rj" alt="profile_picture">
-                <h3>이름<% //session.getAttribute("user_name").toString() %></h3>
-                <p>부서<% //session.getAttribute("dept_name_kor").toString() %></p>
+                <h3><%= session.getAttribute("user_name").toString() %></h3>
+                <p><%= session.getAttribute("dept_name_kor").toString() %></p>
             </div>
             <ul>
                 <li>
@@ -27,7 +27,7 @@
                         <span class="icon"><i class="fas fa-envelope"></i></span>
                         <span class="item">전자메일</span>
                           <a class="sub_1" href="/Groupware/mail/MailWrite.jsp?status=1" style="font-size: 12px"><i class="fas fa-edit"></i>&nbsp;메일쓰기</a>
-                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp" style="font-size: 12px"><i class="fas fa-envelope-open"></i>&nbsp;메일함</a>
+                      	  <a class="sub_1" href="/Groupware/mail/MailList.jsp?status=2" style="font-size: 12px"><i class="fas fa-envelope-open"></i>&nbsp;메일함</a>
                       	  <a class="sub_1" href="#" style="font-size: 12px"><i class="fas fa-share"></i>&nbsp;보낸메일함</a>
                       	  <a class="sub_1" href="#" style="font-size: 12px"><i class="fas fa-trash"></i>&nbsp;휴지통</a>
                     </a>
