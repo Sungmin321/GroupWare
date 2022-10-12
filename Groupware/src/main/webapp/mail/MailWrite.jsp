@@ -43,6 +43,8 @@ fDao.close();
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
+var childWindow = null;
+
 window.onload = function(){
 	var status = <%=request.getParameter("status")%>;
 	var fileName = "<%=fVo.getOfile()%>";
@@ -52,7 +54,28 @@ window.onload = function(){
 		$('#attachedFile').hide();
 		$('#deleteFileBtn').hide();
 	}
+
+	var childValue = " " + <%= request.getParameter("recipientsValue") %> + " ";
+
+	if(childValue != null && childValue != " null "){
+		var str = childValue.trim();
+		var sliceStr = "";
+		for(var i=1; i<=str.length/9; i++){
+			if(i == str.length/9){
+				sliceStr += str.slice((i-1)*9, i*9);
+			}else{
+				sliceStr += str.slice((i-1)*9, i*9);
+				sliceStr += ",";
+			}
+		}
+		if(status == 1){
+			document.getElementById('recipients1').value = sliceStr;
+		}else if(status == 4){
+			document.getElementById('recipients4').value = sliceStr;
+		}
+	}
 };
+
 
 function btn_click(){
 	$('#upload_btn').hide();
@@ -92,9 +115,15 @@ function delete_btn_click(){
 	document.getElementById("fileName").value = "";
 };
 
+function search_btn(){
+	childWindow = window.open("<%= request.getContextPath() %>/mail/AddRecipient.jsp?status=<%= request.getParameter("status")%>", "받는사람 추가", "width=600, height=400");
+};
+
 </script>
 
 	<h2>메일쓰기</h2>
+	
+	<input type="hidden" id="childSelected" name="childSelected"/>
 
 	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="MailWriteProcess.jsp">
 
@@ -126,7 +155,8 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 		<tr>
 			<td width="15%">받는사람</td>
 			<td>
-				<input type="text" name="recipients" style="width: 90%;"/>
+				<input type="text" name="recipients1" id="recipients1" style="width: 90%;" readonly/>
+				<input type="button" value="찾기" onclick="search_btn();"/>
 			</td>
 		</tr>
 		<tr>
@@ -173,7 +203,8 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 		<tr>
 			<td width="15%">받는사람</td>
 			<td>
-				<input type="text" name="recipients" value="<%= vo.getRecipients() %>" style="width: 90%;"/>
+				<input type="text" name="recipients4" id="recipients4" value="<%= vo.getRecipients() %>" style="width: 90%;"/>
+				<input type="button" value="찾기" onclick="search_btn();"/>
 			</td>
 		</tr>
 		<tr>

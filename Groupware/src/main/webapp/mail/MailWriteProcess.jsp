@@ -32,7 +32,13 @@ String submitValue = mr.getParameter("submitValue"); // 보내기 or 임시저�
 String title = mr.getParameter("title");
 String content = mr.getParameter("content");
 String sender = mr.getParameter("sender");
-String recipients = mr.getParameter("recipients");
+// String recipients = mr.getParameter("recipients");
+String recipients = "";
+if(mr.getParameter("statusValue").equals("1")){
+	recipients = mr.getParameter("recipients1");
+}else if(mr.getParameter("statusValue").equals("4")){
+	recipients = mr.getParameter("recipients4");
+}
 String idxValue = mr.getParameter("idxValue");
 
 int idx = 0;
