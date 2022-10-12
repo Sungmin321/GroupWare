@@ -39,7 +39,8 @@
 
 	<%
 	} else{
-		response.sendRedirect("LoginSuccess.jsp"); // 메인 페이지 구현 후 LoginSucess에서 메인 페이지로 변경
+// 		response.sendRedirect("LoginSuccess.jsp"); // 메인 페이지 구현 후 LoginSucess에서 메인 페이지로 변경
+		response.sendRedirect("../index.jsp"); // 메인 페이지 구현 후 LoginSucess에서 메인 페이지로 변경
 	}
 	%>		
 	
