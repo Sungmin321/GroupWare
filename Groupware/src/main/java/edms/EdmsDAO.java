@@ -342,12 +342,11 @@ public class EdmsDAO extends DBConnPool {
 			if (confirmed.indexOf("1")==-1){
 				//1이 없으면 -1이 나옴.
 				System.out.println(confirmed);
-				query = "UPDATE EDMS SET STATUS = 2 WHERE idx = "+idx;
+				query = "UPDATE EDMS SET STATUS = 2, LASTCONFIRMDATE = SYSDATE WHERE idx = "+idx;
 				System.out.println("전체승인 확인 후 status -> 2로 바꾸는 쿼리 실행");
 				stmt.executeUpdate(query); // 업데이트 !! 
 			}
 				
-			
 			// 그리고 confirmed를 다 돌면서 3이 없고 2만 있으면 status를 2나 3으로 바꿈.
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -399,15 +398,13 @@ public class EdmsDAO extends DBConnPool {
 			result = stmt.executeUpdate(query); // 업데이트 !! 
 			
 			if (confirmed.indexOf("3")>=0){
-				//1이 없으면 -1이 나옴.
+				//3이 없으면 -1이 나옴.
 				System.out.println(confirmed);
-				query = "UPDATE EDMS SET STATUS = 3 WHERE idx = "+idx;
+				query = "UPDATE EDMS SET STATUS = 3, LASTCONFIRMDATE = SYSDATE WHERE idx = "+idx;
 				System.out.println("전체승인 확인 후 status -> 3로 바꾸는 쿼리 실행");
 				stmt.executeUpdate(query); // 업데이트 !! 
 			}
 			
-			
-			// 그리고 confirmed를 다 돌면서 3이 없고 2만 있으면 status를 2나 3으로 바꿈.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
