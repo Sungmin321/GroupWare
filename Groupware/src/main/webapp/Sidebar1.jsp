@@ -162,7 +162,7 @@ body.active .wrapper .section{
       </div>
       
       <div class="logoutBtn" style="margin : 0 0 0 auto;">
-	       <a href="Login/Logout.jsp">로그아웃</a>
+	       <a href="<%= request.getContextPath() %>/Login/Logout.jsp">로그아웃</a>
       </div>
        
     </div>

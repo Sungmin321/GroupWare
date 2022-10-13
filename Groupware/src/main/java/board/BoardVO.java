@@ -9,6 +9,7 @@ public class BoardVO {
 	private String postdate;
 	private String visitcount;
 	private String number;
+	
 	public String getIdx() {
 		return idx;
 	}
