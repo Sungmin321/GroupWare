@@ -21,7 +21,8 @@ int idx4 = 0; // status = 4일떄 idx
 request.setCharacterEncoding("utf-8");
 
 // Request와 MultipartRequest 객체를 동시에 사용할 수 없으므로 MultipartRequest 객체 생성
-String saveDirectory = application.getRealPath("/Uploads");
+// String saveDirectory = application.getRealPath("/Uploads");
+String saveDirectory = "C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/ROOT/Uploads";
 int maxPostSize = 1024 * 1000 * 10; // 10MB
 String encoding = "UTF-8";
 
@@ -220,7 +221,7 @@ if(ofile != null){
 		fVo.setOfile(ofile);
 		fVo.setSfile(sfile);
 
-		// 조건 3 (insert or updqte)
+		// 조건 3 (insert or update)
 		if(fDao.selectView(fileIdx) == null){
 			System.out.println("fDao.selectView(fileIdx) == null)");
 		}

@@ -6,7 +6,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String saveDirectory = application.getRealPath("/Uploads");
+//String saveDirectory = application.getRealPath("/Uploads");
+String saveDirectory = "C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/ROOT/Uploads";
+
+System.out.println("saveDirectory : " + saveDirectory);
+
 String saveFilename = request.getParameter("sName");
 String originalFilename = request.getParameter("oName");
 

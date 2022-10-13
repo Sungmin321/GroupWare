@@ -19,6 +19,7 @@ String user_id = session.getAttribute("user_id").toString();
 UserInfoDAO uDao = new UserInfoDAO();
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
+uDao.close();
 
 // status == 4
 int idx = 0;

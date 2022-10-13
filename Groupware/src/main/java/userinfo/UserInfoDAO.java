@@ -11,33 +11,6 @@ public class UserInfoDAO extends DBConnPool {
 		super();
 	}
 	
-//	public UserInfoVO getUserInfoVO(String user_id, String user_pw) {
-//		UserInfoVO vo = new UserInfoVO();
-//		
-//		String query = "SELECT * FROM userinfo WHERE user_id=? AND user_pw=?";
-//		
-//		try {
-//			psmt = con.prepareStatement(query);
-//			psmt.setString(1, user_id);
-//			psmt.setString(2, user_pw);
-//			rs = psmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				vo.setUser_code(rs.getInt("user_code"));
-//				vo.setUser_name(rs.getString("user_name"));
-//				vo.setUser_id(rs.getString("user_id"));
-//				vo.setUser_pw(rs.getString("user_pw"));
-//				vo.setDept_id(rs.getInt("dept_id"));
-//				vo.setPos_id(rs.getInt("pos_id"));
-//				vo.setRes_id(rs.getInt("res_id"));
-//			}
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return vo;
-//	}
-	
 	public UserInfoKorVO getUserInfoVO(String user_id, String user_pw) {
 		UserInfoKorVO vo = new UserInfoKorVO();
 		
