@@ -5,6 +5,9 @@
  <%@ page import="java.util.*" %>
 <%@ page import="utils.BoardPage"%>
  <%
+	request.setCharacterEncoding("utf-8");
+ 	response.setContentType("text/html;charset=utf-8");
+ 	
  	BoardDAO dao = BoardDAO.getInstance();
 //DAO를 생성해 DB에 연결
 
@@ -17,8 +20,8 @@ if (searchWord != null) {
 	param.put("searchWord", searchWord);
 }
 	String cate = "";
-	System.out.println((String)session.getAttribute("cate"));
-	if ( ((String)session.getAttribute("cate")).length() > 0){ //0보다 크다? == 세션에 내용이 있다
+	System.out.println(session.getAttribute("cate").toString()+ " - 세션 확인");
+	if ( session.getAttribute("cate").toString().length() > 0){ //0보다 크다? == 세션에 내용이 있다
 		cate = (String)session.getAttribute("cate");
 	}else {
 	    cate = request.getParameter("cate");
@@ -105,7 +108,7 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 		%>
 		<tr align="center">
 			<td><%=virtualNum%></td>
-			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>"><%=vo.getTitle()%></a></td>
+			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>&i=<%=virtualNum%>"><%=vo.getTitle()%></a></td>
 			<td align="center"><%=dao.getName(vo.getUsercode())%></td>
 			<td align="center"><%=vo.getVisitcount()%></td>
 			<td align="center"><%=vo.getPostdate()%></td>
@@ -121,9 +124,24 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 			<!-- 페이징 처리 -->
 			<td><%=BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, request.getRequestURI())%></td>
 			<!-- 글쓰기 버튼 -->
+			<%
+				String enpcate = session.getAttribute("cate").toString();
+				String enpdept_kor = session.getAttribute("dept_name_kor").toString();
+				
+			if (enpcate.equals("2")){
+			%>
 			<td>
 				<button type="button" onclick="location.href='Write.jsp';">글쓰기</button>
 			</td>
+			<%} // cate가 1이나 3일때는 인사팀이여야만 글쓰기가 나오게.
+			else if ((enpcate.equals("1")||enpcate.equals("3")) & enpdept_kor.equals("인사팀"))  {
+			%>
+			<td>
+				<button type="button" onclick="location.href='Write.jsp';">글쓰기</button>
+			</td>
+			<%
+			}
+			%>
 		</tr>
 	</table>
 </body>

@@ -32,6 +32,29 @@ public class AttachedFileDAO extends DBConnPool {
 		
 		return vo;
 	}
+	
+	public boolean findFile(int idx) {
+		int count = 0;
+		boolean result = false;
+		
+		String query = "SELECT COUNT(*)  FROM attachedfile WHERE idx= "+idx;
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+
+			rs.next();
+			count = rs.getInt(1);
+			
+			if (count==1) {
+				result = true;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
 	public int inputFile(AttachedFileVO vo) {
 		int result = 0;

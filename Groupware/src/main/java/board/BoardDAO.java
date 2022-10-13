@@ -43,6 +43,24 @@ public class BoardDAO extends DBConnPool{
 
 	}
 	
+	public int updateEdit (BoardVO vo, String idx) {
+		int result = 0;
+		
+		try {
+			String query = "UPDATE BOARD2 SET TITLE = ?, CONTENT = ? WHERE idx = "+idx;
+			
+			psmt = con.prepareStatement(query); // ��������
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public int selectCount(Map<String, Object> map, String cate) {
 		int totalCount = 0;
 
@@ -281,7 +299,59 @@ public class BoardDAO extends DBConnPool{
 		}
 		return result;
 	}
+	
+	public int getIdx(BoardVO vo) { // idx 값 가져오기.
+		int idx = 0;
+		String query = "SELECT idx FROM BOARD2 b  WHERE b.USER_CODE = ? AND b.CATE = ? AND b.title = ? AND b.CONTENT = ?";
 
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, vo.getUsercode());
+			psmt.setString(2, vo.getCate());
+			psmt.setString(3, vo.getTitle());
+			psmt.setString(4, vo.getContent());
+
+			rs = psmt.executeQuery();
+//			System.out.println(rs);
+			rs.next();
+			idx = rs.getInt(1);
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return idx;
+	}
+
+	public BoardVO ViewBoard(String idx) {
+		updateVisitCount(idx);
+		BoardVO vo = new BoardVO();
+
+		String query = "SELECT idx, USER_NAME , b.USER_CODE , TITLE , CONTENT , TO_CHAR(POSTDATE, 'yyyy-mm-dd') , VISITCOUNT "
+				+ " FROM USERINFO u , BOARD2 b "
+				+ " WHERE idx = "+ idx;
+
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				vo.setIdx(rs.getString(1));
+				vo.setName(rs.getString(2));
+				vo.setUsercode(rs.getString(3));
+				vo.setTitle(rs.getString(4));
+				vo.setContent(rs.getString(5));
+				vo.setPostdate(rs.getString(6));
+				vo.setVisitcount(rs.getString(7));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return vo;
+	}
+	
 	public void updateVisitCount(int idx) {
 		String query = "UPDATE board2"
 				+ " SET visitcount = visitcount + 1"
@@ -295,6 +365,36 @@ public class BoardDAO extends DBConnPool{
 			System.out.println("게시물 조회수 증가 중 예외 발생");
 			e.printStackTrace();
 		}
+	}
+	
+	public void updateVisitCount(String idx) {
+		String query = "UPDATE BOARD2 SET VISITCOUNT = VISITCOUNT + 1 WHERE idx = "+idx;
+
+		try {
+			stmt = con.createStatement();
+			stmt.execute(query);
+			System.out.println("조회수 증가");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public int deletePost(String idx) {
+		int result = 0;
+
+		try {
+			String query = "DELETE FROM board2 WHERE idx="+idx;
+
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

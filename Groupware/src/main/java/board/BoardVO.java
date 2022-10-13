@@ -11,6 +11,7 @@ public class BoardVO {
 	private String number;
 	
 	private String user_name;
+	private String name;
 	
 	public String getIdx() {
 		return idx;
@@ -66,5 +67,11 @@ public class BoardVO {
 	}
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

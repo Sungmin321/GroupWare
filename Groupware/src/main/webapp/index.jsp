@@ -39,7 +39,7 @@
 		%>
 		<tr align="center">
 			<td><%= i+1 %></td>
-			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>"><%=vo.getTitle()%></a></td>
+			<td align="left"><a href="board/View.jsp?idx=<%=vo.getIdx()%>&i=<%=i+1%>&cate=1"><%=vo.getTitle()%></a></td>
 			<td align="center"><%=dao.getName(vo.getUsercode())%></td>
 			<td align="center"><%=vo.getVisitcount()%></td>
 			<td align="center"><%=vo.getPostdate()%></td>
@@ -87,7 +87,7 @@
 		%>
 		<tr align="center">
 			<td><%= i+1 %></td>
-			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>"><%=vo.getTitle()%></a></td>
+			<td align="left"><a href="board/View.jsp?idx=<%=vo.getIdx()%>&i=<%=i+1%>&cate=2"><%=vo.getTitle()%></a></td>
 			<td align="center"><%=dao.getName(vo.getUsercode())%></td>
 			<td align="center"><%=vo.getVisitcount()%></td>
 			<td align="center"><%=vo.getPostdate()%></td>

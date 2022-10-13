@@ -32,7 +32,7 @@ body{
   top: 0;
   left: 0;
   width: 20%;
-  height: 110%;
+  height: 130%;
   padding: 20px 0;
   transition: all 0.5s ease;
 }
