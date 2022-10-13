@@ -123,6 +123,12 @@ body{
   color: #f4fbff;
 }
 
+.wrapper .section .top_navbar .logoutBtn a{
+  font-size: 15px;
+  color: #f4fbff;
+  text-align : center;
+}
+
 .wrapper .section .top_navbar .hamburger a:hover{
   color: #a2ecff;
 }
@@ -154,5 +160,10 @@ body.active .wrapper .section{
           <i class="fas fa-bars"></i>
         </a>
       </div>
+      
+      <div class="logoutBtn" style="margin : 0 0 0 auto;">
+	       <a href="Login/Logout.jsp">로그아웃</a>
+      </div>
+       
     </div>
     <div class="container">

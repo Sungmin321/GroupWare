@@ -18,7 +18,7 @@
 	
 	<script>
 	function validateForm(form){
-		if(!form.user_id.value){
+		if(!form.user_id.value){1
 			alert("아이디를 입력하세요.");
 			form.user_id.focus();
 			return false;

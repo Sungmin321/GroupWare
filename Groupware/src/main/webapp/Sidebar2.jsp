@@ -41,7 +41,7 @@
                       	  <a class="sub_2" href="/Groupware/edms/EdmsApproval.jsp" style="font-size: 12px"><i class="fas fa-edit"></i>&nbsp;전자결재 상신</a>
                       	  <a class="sub_2" href="/Groupware/edms/EdmsList.jsp" style="font-size: 12px"><i class="fas fa-list"></i>&nbsp;리스트</a>
                       	  <a class="sub_2" href="/Groupware/edms/EdmsApprovalWaitingList.jsp" style="font-size: 12px"><i class="fas fa-outdent"></i>&nbsp;승인대기</a>
-                      	  <a class="sub_2" href="#" style="font-size: 12px"><i class="fas fa-cubes"></i>&nbsp;자료실</a>
+                      	  <a class="sub_2" href="/Groupware/edms/EdmsFileList.jsp" style="font-size: 12px"><i class="fas fa-cubes"></i>&nbsp;자료실</a>
                     </a>
                 </li>
                 
