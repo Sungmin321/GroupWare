@@ -16,7 +16,7 @@
                 </li>
         
                 <li>
-                    <a href="#">
+                    <a href="/Groupware/board/savenoti.jsp">
                         <span class="icon"><i class="fas fa-podcast"></i></span>
                         <span class="item">공지사항</span>
                     </a>
@@ -46,7 +46,7 @@
                 </li>
                 
                 <li>
-                    <a href="#">
+                    <a href="/Groupware/board/savenoti2.jsp">
                         <span class="icon"><i class="fas fa-users"></i></span>
                         <span class="item">게시판</span>
                     </a>
