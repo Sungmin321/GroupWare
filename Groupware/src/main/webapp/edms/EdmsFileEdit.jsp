@@ -41,7 +41,26 @@ fDao.close();
 <title>전자결재 - 게시글 수정</title>
 </head>
 <body>
-<script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var fileName = "<%=fVo.getOfile()%>";
+	
+	if(fileName != null && fileName != "null"){
+		$('#attachedFile').hide();
+		$('#deleteFileBtn').hide();
+	}
+};
+
+function btn_click(){
+	$('#upload_btn').hide();
+	$('#fileName').hide();
+	$('#delete_btn').hide();
+	$('#attachedFile').show();
+	$('#deleteFileBtn').show();
+	document.getElementById("attachedFile").value = "아무 의미 없는 값";
+};
+
 function validateForm(form){
 	if(!form.title.value){
 		alert("제목을 입력하세요.");
@@ -55,6 +74,10 @@ function validateForm(form){
 
 function deleteFile(){
 	document.getElementById("attachedFile").value = "";
+};
+
+function delete_btn_click(){
+	document.getElementById("fileName").value = "";
 };
 </script>
 	<h2>수정하기</h2>
@@ -84,8 +107,6 @@ function deleteFile(){
 <%
 if(fVo.getOfile() != null){
 %>
-				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
-				
 				<input type="button" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
 				<input type="button" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
 				<input type="text" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
