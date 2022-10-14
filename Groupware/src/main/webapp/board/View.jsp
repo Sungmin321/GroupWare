@@ -8,9 +8,14 @@
 <% 	
 	request.setCharacterEncoding("utf-8");
 	response.setContentType("text/html;charset=utf-8");
-	String cate = request.getParameter("cate");
 	
-	session.setAttribute("cate", cate);
+	if( session.getAttribute("cate") == null ){ // 세션에 값이 없거나 -> main 화면에서 바로 들어온 경우. main에서 받아서 세션에 저장시켜준다.
+		String cate = request.getParameter("cate");
+	
+		session.setAttribute("cate", cate);
+	}else if ( !session.getAttribute("cate").toString().equals(request.getParameter("cate")) ){ //세션의 cate 값과 request의 cate값이 같은경우.
+		session.setAttribute("cate", request.getParameter("cate"));
+	}
 	
 	BoardDAO bdao = BoardDAO.getInstance();
 	

@@ -42,6 +42,16 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return list;
@@ -89,6 +99,16 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return list;
@@ -120,6 +140,16 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 		}
 
@@ -155,6 +185,14 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (psmt != null)
+					psmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return result;
@@ -182,27 +220,47 @@ public class EdmsDAO extends DBConnPool {
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally {
+			try {
+				if (psmt != null)
+					psmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return idx;
 	}
-	
-	public int getJobposnum (String user_code) { // pos_number (직위코드) 값 가져오기.
+
+	public int getJobposnum(String user_code) { // pos_number (직위코드) 값 가져오기.
 		int idx = 0;
-		String query = "SELECT POS_ID FROM USERINFO u WHERE USER_CODE = "+user_code;
+		String query = "SELECT POS_ID FROM USERINFO u WHERE USER_CODE = " + user_code;
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
-			
+
 			rs.next();
-			
+
 			idx = rs.getInt(1);
-			
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
-		
+
 		return idx;
 	}
 
@@ -231,6 +289,16 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return list;
@@ -263,12 +331,14 @@ public class EdmsDAO extends DBConnPool {
 					// System.out.println("confirmeds : "+confirmeds[i]);
 					// System.out.println("codes : "+codes[i]);
 					// System.out.println("user_code : "+user_code);
-					if (confirmeds[i].equals("1") && codes[i].equals(user_code)) { // 유저코드랑 결재상태가 1인 것 [뒤에서 부터 봄 (아랫결제라인)] true 조건
-						System.out.println("승인대기 게시물 idx : " +  rs.getString(3));
+					if (confirmeds[i].equals("1") && codes[i].equals(user_code)) { // 유저코드랑 결재상태가 1인 것 [뒤에서 부터 봄
+																					// (아랫결제라인)] true 조건
+						System.out.println("승인대기 게시물 idx : " + rs.getString(3));
 						flag = true;
 						// flag를 true로 바꾸고 for문을 나와라.
 						break;
-					}else if (confirmeds[i].equals("1")) { // 유저코드랑 결재상태가 1이 아니라서 다음으로 넘어왓는데 결재상태는 1이다 ? -> 아랫사람이 결재를 안한거. 이 게시물은 pass
+					} else if (confirmeds[i].equals("1")) { // 유저코드랑 결재상태가 1이 아니라서 다음으로 넘어왓는데 결재상태는 1이다 ? -> 아랫사람이 결재를
+															// 안한거. 이 게시물은 pass
 						break;
 					}
 
@@ -292,6 +362,16 @@ public class EdmsDAO extends DBConnPool {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return list;
@@ -311,45 +391,55 @@ public class EdmsDAO extends DBConnPool {
 			rs = stmt.executeQuery(query);
 
 			rs.next(); // rs 결과물을 받아서
-			
+
 			String codes[] = rs.getString(1).split("/"); // String[]로 받아서
 			String confirmeds[] = rs.getString(2).split("/");
-			
+
 			System.out.println(Arrays.toString(codes));
 			System.out.println(Arrays.toString(confirmeds));
 
 			for (int i = codes.length - 1; i >= 0; i--) {
 				if (confirmeds[i].equals("1") && codes[i].equals(user_code)) { // 상태가 1이고 usercode가 같은게 있다면 2로 변경.
 					confirmeds[i] = "2";
-					System.out.println("승인 완료 confirmeds["+i+"] : "+confirmeds[i]);
+					System.out.println("승인 완료 confirmeds[" + i + "] : " + confirmeds[i]);
 				}
 			}
-			
+
 			String confirmed = "";
-			
-			for(int i=0; i<confirmeds.length; i++) {
-				confirmed += confirmeds[i]+"/";
+
+			for (int i = 0; i < confirmeds.length; i++) {
+				confirmed += confirmeds[i] + "/";
 			}
-			
-			confirmed = confirmed.substring(0,confirmed.length()-1);
+
+			confirmed = confirmed.substring(0, confirmed.length() - 1);
 			System.out.println(confirmed);
-			
-			query = "UPDATE EDMS SET CONFIRMED = '"+confirmed+"' WHERE idx = "+idx;
-			System.out.println("[[수정 쿼리 : "+query+"]]");
-			
-			result = stmt.executeUpdate(query); // 업데이트 !! 
-			
-			if (confirmed.indexOf("1")==-1){
-				//1이 없으면 -1이 나옴.
+
+			query = "UPDATE EDMS SET CONFIRMED = '" + confirmed + "' WHERE idx = " + idx;
+			System.out.println("[[수정 쿼리 : " + query + "]]");
+
+			result = stmt.executeUpdate(query); // 업데이트 !!
+
+			if (confirmed.indexOf("1") == -1) {
+				// 1이 없으면 -1이 나옴.
 				System.out.println(confirmed);
-				query = "UPDATE EDMS SET STATUS = 2, LASTCONFIRMDATE = SYSDATE WHERE idx = "+idx;
+				query = "UPDATE EDMS SET STATUS = 2, LASTCONFIRMDATE = SYSDATE WHERE idx = " + idx;
 				System.out.println("전체승인 확인 후 status -> 2로 바꾸는 쿼리 실행");
-				stmt.executeUpdate(query); // 업데이트 !! 
+				stmt.executeUpdate(query); // 업데이트 !!
 			}
-				
+
 			// 그리고 confirmed를 다 돌면서 3이 없고 2만 있으면 status를 2나 3으로 바꿈.
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return result;
@@ -357,61 +447,71 @@ public class EdmsDAO extends DBConnPool {
 
 	public int updateReferConfirmed(String user_code, String idx) {
 		int result = 0;
-		
+
 		String query = "SELECT LINE , CONFIRMED  FROM EDMS e WHERE idx = " + idx;
-		
+
 		System.out.println(query);
 		// 결재권자, 결재상태 받아오기.
-		
+
 		try {
 			stmt = con.createStatement();
-			
+
 			rs = stmt.executeQuery(query);
-			
+
 			rs.next(); // rs 결과물을 받아서
-			
+
 			String codes[] = rs.getString(1).split("/"); // String[]로 받아서
 			String confirmeds[] = rs.getString(2).split("/");
-			
+
 			System.out.println(Arrays.toString(codes));
 			System.out.println(Arrays.toString(confirmeds));
-			
+
 			for (int i = codes.length - 1; i >= 0; i--) {
 				if (confirmeds[i].equals("1") && codes[i].equals(user_code)) { // 상태가 1이고 usercode가 같은게 있다면 2로 변경.
 					confirmeds[i] = "3";
-					System.out.println("반려 완료 confirmeds["+i+"] : "+confirmeds[i]);
+					System.out.println("반려 완료 confirmeds[" + i + "] : " + confirmeds[i]);
 				}
 			}
-			
+
 			String confirmed = "";
-			
-			for(int i=0; i<confirmeds.length; i++) {
-				confirmed += confirmeds[i]+"/";
+
+			for (int i = 0; i < confirmeds.length; i++) {
+				confirmed += confirmeds[i] + "/";
 			}
-			
-			confirmed = confirmed.substring(0,confirmed.length()-1);
+
+			confirmed = confirmed.substring(0, confirmed.length() - 1);
 			System.out.println(confirmed);
-			
-			query = "UPDATE EDMS SET CONFIRMED = '"+confirmed+"' WHERE idx = "+idx;
-			System.out.println("[[수정 쿼리 : "+query+"]]");
-			
-			result = stmt.executeUpdate(query); // 업데이트 !! 
-			
-			if (confirmed.indexOf("3")>=0){
-				//3이 없으면 -1이 나옴.
+
+			query = "UPDATE EDMS SET CONFIRMED = '" + confirmed + "' WHERE idx = " + idx;
+			System.out.println("[[수정 쿼리 : " + query + "]]");
+
+			result = stmt.executeUpdate(query); // 업데이트 !!
+
+			if (confirmed.indexOf("3") >= 0) {
+				// 3이 없으면 -1이 나옴.
 				System.out.println(confirmed);
-				query = "UPDATE EDMS SET STATUS = 3, LASTCONFIRMDATE = SYSDATE WHERE idx = "+idx;
+				query = "UPDATE EDMS SET STATUS = 3, LASTCONFIRMDATE = SYSDATE WHERE idx = " + idx;
 				System.out.println("전체승인 확인 후 status -> 3로 바꾸는 쿼리 실행");
-				stmt.executeUpdate(query); // 업데이트 !! 
+				stmt.executeUpdate(query); // 업데이트 !!
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
-		
+
 		return result;
 	}
-	
+
 	public String getName(String user_code) {
 		String name = "";
 
@@ -427,6 +527,16 @@ public class EdmsDAO extends DBConnPool {
 //			System.out.println(name);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return name;
@@ -455,6 +565,16 @@ public class EdmsDAO extends DBConnPool {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return evo;

@@ -33,7 +33,6 @@
 	String idx = multipartrequest.getParameter("idx");
 //DAO 객체를 통해 DB에 VO 저장
 int iResult = dao.updateEdit(vo, idx);
-
 // 성공 or 실패?
 if (iResult == 1) {
 	

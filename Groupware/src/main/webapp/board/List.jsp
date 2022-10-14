@@ -9,9 +9,9 @@
  	response.setContentType("text/html;charset=utf-8");
  	
  	BoardDAO dao = BoardDAO.getInstance();
-//DAO를 생성해 DB에 연결
+	//DAO를 생성해 DB에 연결
 
-//사용자가 입력한 검색 조건을 Map에 저장
+	//사용자가 입력한 검색 조건을 Map에 저장
 Map<String, Object> param = new HashMap<String, Object>();
 String searchField = request.getParameter("searchField");
 String searchWord = request.getParameter("searchWord");
@@ -19,14 +19,21 @@ if (searchWord != null) {
 	param.put("searchField", searchField);
 	param.put("searchWord", searchWord);
 }
-	String cate = "";
-	System.out.println(session.getAttribute("cate").toString()+ " - 세션 확인");
-	if ( session.getAttribute("cate").toString().length() > 0){ //0보다 크다? == 세션에 내용이 있다
-		cate = (String)session.getAttribute("cate");
-	}else {
-	    cate = request.getParameter("cate");
+	String cate = session.getAttribute("cate").toString();
+	System.out.println("세션에 저장 된 cate 값 : "+session.getAttribute("cate").toString());
+	//if ( session.getAttribute("cate").toString().length() > 0){ //0보다 크다? == 세션에 내용이 있다
+	//	cate = (String)session.getAttribute("cate");
+	//}else {
+	//    cate = request.getParameter("cate");
+	//}
+	String notititle = "";
+	if (cate.equals("1")){
+		notititle = "공지사항";
+	}else if(cate.equals("2")){
+		notititle = "게시판";
+	}else if(cate.equals("3")){
+		notititle = "전자결재 자료실";
 	}
-	
 
 int totalCount = dao.selectCount(param, cate);
 System.out.println("totalCount : "+totalCount);
@@ -50,6 +57,7 @@ param.put("end", end);
 //페이지 처리 end
 
 List<BoardVO> boardLists = dao.selectListPage(param, cate);
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -60,7 +68,7 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 </head>
 <body>
 	<h2>
-		목록 보기(List) - 현재 페이지 :
+		<%= notititle %> 목록 - 현재 페이지 :
 		<%=pageNum%>
 		(전체 :
 		<%=totalPage%>)

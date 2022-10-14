@@ -14,7 +14,7 @@
 	BoardVO vo = bdao.ViewBoard(idx);
 	//idx로 정보 찾아오고
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,7 +36,7 @@
 </head>
 <body>
 <%  %>
-	<h2>회원제 게시판 - 수정하기(Edit)</h2>
+	<h2>회원제 게시판 - 수정하기(Edit) 현재 cate : <%= request.getAttribute("cate") %></h2>
 	<form name="EidtFrm" method="post" action="EditProcess.jsp" enctype="multipart/form-data" onsubmit="return validateForm(this);">
 		<table border="1" width="90%">
 			<tr>

@@ -14,6 +14,7 @@
 	dao.deletePost(idx);
 	adao.delete(Integer.parseInt(idx));
 	//삭제구문 실행
+	adao.close();
 %>
 <script>
 	alert("게시물이 삭제 되었습니다.");
