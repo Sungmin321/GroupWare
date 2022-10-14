@@ -9,9 +9,9 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-// String edmsFile = "";
-// BoardDAO dao = new BoardDAO(edmsFile);
-BoardDAO dao = BoardDAO.getInstance();
+//String edmsFile = "";
+//BoardDAO dao = new BoardDAO(edmsFile);
+ BoardDAO dao = BoardDAO.getInstance();
 
 Map<String, Object> map = new HashMap<String, Object>();
 String searchField = request.getParameter("searchField");

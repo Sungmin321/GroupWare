@@ -54,33 +54,12 @@ List<UserInfoKorVO> list = dao.findAll(map);
 
 <h3>직원 관리</h3>
 
-
-
-
-<!-- <form> -->
-<!--     <fieldset> -->
-<!--      <div class="form-group"> -->
-<!--         <label for="exampleSelect1" class="form-label mt-4">Example select</label> -->
-<!--         <select class="form-select" id="exampleSelect1"> -->
-<!--           <option>1</option> -->
-<!--           <option>2</option> -->
-<!--           <option>3</option> -->
-<!--           <option>4</option> -->
-<!--           <option>5</option> -->
-<!--         </select> -->
-<!--       </div> -->
-<!-- 	  </fieldset> -->
-<!-- </form> -->
-
-
-
-
 	<input type="hidden" id="checkedValue" value=""/>
 	
 	<table class="table table-hover" width="90%">
 	<thead>
 		<tr align="right">
-			<th scope="col" style="border-bottom:none;">
+			<th colspan="3" scope="col" style="border-bottom:none;">
 				<button type="button" class="btn btn-primary" onclick="editUserInfo();">수정하기</button>
 				<button type="button" class="btn btn-primary" onclick="addUser();">직원 추가</button>
 			</th>		
@@ -92,20 +71,42 @@ List<UserInfoKorVO> list = dao.findAll(map);
 	<table class="table table-hover" width="90%">
 	<thead>
 		<tr align="center">
-			<th scope="col" style="border-bottom:none;">
-		<fieldset>
-			 <div class="form-group">
-				<select class="form-select" name="searchField">
+			
+			<th style="width:30%; border-bottom:none;">
+			</th>
+			
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:right;">
+				<select class="form-select" name="searchField" style="width:200px;">
 					<option value="dept_name_kor">부서명</option>
 					<option value="user_name">이름</option>
 					<option value="user_code">사원코드</option>
 					<option value="res_name_kor">직책</option>
 				</select>
 			 </div>
-				<input type="text" name="searchWord"/>
-				<input type="submit" value="검색"/>
-		</fieldset>
+			</fieldset>
 			</th>
+			
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:center;">
+				<input type="text" class="form-control" name="searchWord" style="width:200px;"/>
+			 </div>
+			</fieldset>
+			</th>
+			
+			<th scope="col" style="width:10%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:left;">
+				<input type="submit" class="btn btn-outline-primary" value="검색"/>
+			 </div>
+			</fieldset>
+			</th>
+			
+			<th style="width:30%; border-bottom:none;">
+			</th>
+			
 		</tr>
 	</thead>
 	</table>

@@ -9,7 +9,7 @@
             </div>
             <ul>
                 <li>
-                    <a href="/Groupware/index.jsp" class="active">
+                    <a href="/Groupware/main.jsp" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">Home</span>
                     </a>
