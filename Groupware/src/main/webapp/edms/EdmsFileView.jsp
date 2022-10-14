@@ -9,6 +9,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+request.setCharacterEncoding("utf-8");
+
 // 수정하기, 삭제하기 버튼 접근 권한 확인
 String user_id = session.getAttribute("user_id").toString();
 
@@ -20,10 +22,11 @@ String user_code = String.valueOf(iVo.getUser_code());
 int idx = Integer.parseInt(request.getParameter("idx"));
 
 String edmsFile = "";
-BoardDAO dao = new BoardDAO(edmsFile);
+// BoardDAO dao = new BoardDAO(edmsFile);
+BoardDAO dao = BoardDAO.getInstance();
 dao.updateVisitCount(idx);
 BoardVO vo = dao.selectView(idx);
-dao.close();
+// dao.close();
 
 // 상세페이지 첨부파일
 AttachedFileDAO fDao = new AttachedFileDAO();
@@ -41,12 +44,20 @@ fDao.close();
 
 <script>
 function deletePost(){
-	
+	var confirmed = confirm("정말로 삭제하시겠습니까?");
+	if(confirmed){
+		var form = document.viewFrm;
+		form.method = "post";
+		form.action = "EdmsFileDeleteProcess.jsp";
+		form.submit();
+	}
 };
 </script>
 
 	<h2>상세보기</h2>
 	
+	<form name="viewFrm">
+	<input type="hidden" name="idx" value="<%= idx %>"/>
 	<table border="1" width="90%">
 		<tr>
 			<td align="center" width="15%">작성자</td>
@@ -93,6 +104,7 @@ if(session.getAttribute("user_id") != null && user_code.equals(vo.getUsercode())
 			</td>
 		</tr>
 	</table>
+	</form>
 </body>
 </html>
 <%@ include file="../Sidebar2.jsp" %>

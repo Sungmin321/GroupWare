@@ -24,6 +24,7 @@ List<UserInfoKorVO> list = dao.findAll(map);
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>직원 관리</title>
 </head>
@@ -51,45 +52,79 @@ List<UserInfoKorVO> list = dao.findAll(map);
 	
 </script>
 
+<h3>직원 관리</h3>
+
+
+
+
+<!-- <form> -->
+<!--     <fieldset> -->
+<!--      <div class="form-group"> -->
+<!--         <label for="exampleSelect1" class="form-label mt-4">Example select</label> -->
+<!--         <select class="form-select" id="exampleSelect1"> -->
+<!--           <option>1</option> -->
+<!--           <option>2</option> -->
+<!--           <option>3</option> -->
+<!--           <option>4</option> -->
+<!--           <option>5</option> -->
+<!--         </select> -->
+<!--       </div> -->
+<!-- 	  </fieldset> -->
+<!-- </form> -->
+
+
+
+
 	<input type="hidden" id="checkedValue" value=""/>
 	
-	<table width="90%">
-		<tr>
-			<td align="right">
-				<button type="button" onclick="editUserInfo();">수정하기</button>
-				<button type="button" onclick="addUser();">직원 추가</button>
-			</td>
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="right">
+			<th scope="col" style="border-bottom:none;">
+				<button type="button" class="btn btn-primary" onclick="editUserInfo();">수정하기</button>
+				<button type="button" class="btn btn-primary" onclick="addUser();">직원 추가</button>
+			</th>		
 		</tr>
+	</thead>
 	</table>
 	
 	<form method="get">
-	<table border="1" width="90%">
-		<tr>
-			<td align="center">
-				<select name="searchField">
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="center">
+			<th scope="col" style="border-bottom:none;">
+		<fieldset>
+			 <div class="form-group">
+				<select class="form-select" name="searchField">
 					<option value="dept_name_kor">부서명</option>
 					<option value="user_name">이름</option>
 					<option value="user_code">사원코드</option>
 					<option value="res_name_kor">직책</option>
 				</select>
+			 </div>
 				<input type="text" name="searchWord"/>
 				<input type="submit" value="검색"/>
-			</td>
+		</fieldset>
+			</th>
 		</tr>
+	</thead>
 	</table>
 	</form>
 	
-	<table border="1" width="90%">
-		<tr align="center">
-			<td></td>
-			<td>이름</td>
-			<td>아이디</td>
-			<td>비밀번호</td>
-			<td>사원코드</td>
-			<td>부서</td>
-			<td>직급</td>
-			<td>직책</td>
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="center" style="background-color:#DCDCDC;">
+			<th scope="col"></th>
+			<th scope="col">이름</th>
+			<th scope="col">아이디</th>
+			<th scope="col">비밀번호</th>
+			<th scope="col">사원코드</th>
+			<th scope="col">부서</th>
+			<th scope="col">직급</th>
+			<th scope="col">직책</th>
 		</tr>
+	</thead>
+	<tbody>
 <%
 if(list.isEmpty()){
 %>
@@ -130,6 +165,7 @@ if(list.isEmpty()){
  	} // for문의 끝
 } // else문의 끝
 %>	
+	</tbody>
 	</table>
 	
 </body>

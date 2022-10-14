@@ -13,7 +13,7 @@ if(session.getAttribute("user_id") == null){
 
 <script>
 	alert("로그인 후 이용해주십시오.");
-	location.href='../Login/LoginForm.jsp';
+	location.href='../index.jsp';
 </script>
 	return;
 <%

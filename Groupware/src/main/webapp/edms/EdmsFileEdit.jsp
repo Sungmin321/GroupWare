@@ -14,9 +14,10 @@ request.setCharacterEncoding("utf-8");
 int idx = Integer.parseInt(request.getParameter("idx"));
 
 String edmsFile = "";
-BoardDAO dao = new BoardDAO(edmsFile);
+// BoardDAO dao = new BoardDAO(edmsFile);
+BoardDAO dao = BoardDAO.getInstance();
 BoardVO vo = dao.selectView(idx);
-dao.close();
+// dao.close();
 
 // id, 사원코드 정보 가져오기
 String user_id = session.getAttribute("user_id").toString();
@@ -82,11 +83,11 @@ function delete_btn_click(){
 </script>
 	<h2>수정하기</h2>
 	
-	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="EdmsFileWriteProcess.jsp">
+	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="EdmsFileEditProcess.jsp">
 	
 	<input type="hidden" name="idx" value="<%= idx %>"/>
-	<input type="hidden" name="user_code" value="<%= user_code %>"/>
-	<input type="hidden" name="cate" value="3"/>
+<%-- 	<input type="hidden" name="user_code" value="<%= user_code %>"/> --%>
+<!-- 	<input type="hidden" name="cate" value="3"/> -->
 	
 	<table border="1" width="90%">
 		<tr>

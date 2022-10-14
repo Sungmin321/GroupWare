@@ -26,12 +26,11 @@ BoardVO bVo = new BoardVO();
 bVo.setCate(cate);
 bVo.setUsercode(user_code);
 bVo.setTitle(title);
-if(content != null){
-	bVo.setContent(content);
-}
+bVo.setContent(content);
 
 String edmsFile = "";
-BoardDAO bDao = new BoardDAO(edmsFile);
+// BoardDAO bDao = new BoardDAO(edmsFile);
+BoardDAO bDao = BoardDAO.getInstance();
 int edmsResult = bDao.insertWrite(bVo);
 
 
@@ -80,7 +79,7 @@ if(ofile != null){ // 첨부파일이 있을때
 	}
 }
 
-bDao.close();
+// bDao.close();
 
 if(ofile == null){ // 첨부파일이 없는 경우
 %>
@@ -101,7 +100,7 @@ if(ofile == null){ // 첨부파일이 없는 경우
 }else{	
 %>
 <script>
-	alert("파일 업로드에 실패하였씁니다.");
+	alert("파일 업로드에 실패하였습니다.");
 	history.back();
 </script>
 <%

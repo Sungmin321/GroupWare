@@ -9,8 +9,9 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-String edmsFile = "";
-BoardDAO dao = new BoardDAO(edmsFile);
+// String edmsFile = "";
+// BoardDAO dao = new BoardDAO(edmsFile);
+BoardDAO dao = BoardDAO.getInstance();
 
 Map<String, Object> map = new HashMap<String, Object>();
 String searchField = request.getParameter("searchField");
@@ -28,7 +29,7 @@ System.out.println("totalCount : "+totalCount);
 
 // List<BoardVO> boardLists = dao.selectListPage(map, cate); // 추후 페이징 처리 후에 이 메서드로 수정
 List<BoardVO> boardLists = dao.selectList(map, cate);
-dao.close();
+// dao.close();
 %>
 <!DOCTYPE html>
 <html>
