@@ -219,17 +219,6 @@ if(status.equals("5")){
 			</fieldset>
 			</th>
 			
-<!-- 			<td style="border-bottom:none;"> -->
-<%-- 				<input type="hidden" name="status" value="<%=request.getParameter("status")%>"/> --%>
-<!-- 				<select name="searchField"> -->
-<!-- 					<option value="title">제목</option> -->
-<!-- 					<option value="content">내용</option> -->
-<!-- 					<option value="sendder">보낸사람</option> -->
-<!-- 				</select> -->
-<!-- 				<input type="text" name="searchWord"/> -->
-<!-- 				<input type="submit" value="검색"/> -->
-<!-- 			</td>		 -->
-			
 			<th style="width:30%; border-bottom:none;">
 			</th>		
 

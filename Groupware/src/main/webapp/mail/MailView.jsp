@@ -51,7 +51,7 @@ fDao.close();
 		<table class="table table-hover" width="90%">
 		<thead>
 			<tr>
-				<td  style="border-bottom:none;">
+				<td style="border-bottom:none;">
 					<button type="button" class="btn btn-primary" onclick="location.href='MailList.jsp?status=<%= request.getParameter("status") %>';">목록보기</button>
 				</td>
 			</tr>

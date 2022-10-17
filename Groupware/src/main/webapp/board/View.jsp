@@ -36,11 +36,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Board View</title>
 </head>
 <body>
-	<table border="1" width="90%" align="center">
+	<table class="table table-hover" width="90%" align="center">
 		<tr>
 			<td>번호</td>
 			<td><%= number %></td>
@@ -64,7 +65,7 @@
 		</tr>
 		<% if(fVo.getOfile() != null) { %>
 		<tr>
-			<th>첨부파일</th>
+			<td>첨부파일</td>
 			<td>
 			<a href="../attachedfile/Download.jsp?oName=
 			<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %>
@@ -73,23 +74,23 @@
 		</tr>
 		<% }else { %>
 		<tr>
-			<th>첨부파일</th>
-			<td>
+			<td>첨부파일</td>
+			<td colspan="3">
 			첨부 된 파일이 없습니다.
 			</td>
 		</tr>
 		<% } %>
 		<tr>
-				<td colspan="4" align="center">
+				<td colspan="4" align="center" style="border-bottom:none;">
 					<%
 					if (session.getAttribute("user_code") != null && session.getAttribute("user_code").toString().equals(vo.getUsercode())) {
 					%>
-					<button type="button" onclick="location.href='Edit.jsp?idx=<%=vo.getIdx()%>'">수정하기</button>
-					<button type="button" onclick="location.href='DeleteProcess.jsp?idx<%=vo.getIdx()%>&i=<%=number%>'">삭제하기</button> 
+					<button type="button" class="btn btn-primary" onclick="location.href='Edit.jsp?idx=<%=vo.getIdx()%>'">수정하기</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='DeleteProcess.jsp?idx<%=vo.getIdx()%>&i=<%=number%>'">삭제하기</button> 
 					<% } %>
-					<button type="button" onclick="location.href='List.jsp';">목록 보기</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='List.jsp';">목록 보기</button>
 				</td>
-			</tr>
+		</tr>
 	</table>
 </body>
 </html>

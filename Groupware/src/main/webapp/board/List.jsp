@@ -64,32 +64,71 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원제 게시판</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 </head>
 <body>
-	<h2>
+	<h3>
 		<%= notititle %> 목록 - 현재 페이지 :
 		<%=pageNum%>
 		(전체 :
 		<%=totalPage%>)
-	</h2>
+	</h3>
 	<!-- 검색폼 -->
 	<form method="get">
-		<table border="1" width="90%" align="center">
-			<tr>
-				<td align="center"><select name="searchField">
-						<option value="title">제목
-						<option value="content">내용
-				</select> <input type="text" name="searchWord"> <input type="submit" value="검색하기"></td>
+		<table class="table table-hover" width="90%" align="center">
+		<thead>
+			<tr align="center">
+
+			<th style="width:30%; border-bottom:none;">
+			</th>		
+
+					<th scope="col" style="width: 15%; border-bottom: none;">
+						<fieldset>
+							<div class="form-group" style="float: right;">
+								<select class="form-select" name="searchField" style="width: 200px;">
+									<option value="title">제목</option>
+									<option value="content">내용</option>
+								</select>
+							</div>
+						</fieldset>
+					</th>
+
+					<th scope="col" style="width: 15%; border-bottom: none;">
+						<fieldset>
+							<div class="form-group" style="float: center;">
+								<input type="text" class="form-control" name="searchWord" style="width: 200px;" />
+							</div>
+						</fieldset>
+					</th>
+
+					<td scope="col" style="width: 10%; border-bottom: none;">
+						<fieldset>
+							<div class="form-group" style="float: left;">
+								<input type="submit" class="btn btn-outline-primary" value="검색하기" />
+							</div>
+						</fieldset>
+					</td>
+
+			<th style="width:30%; border-bottom:none;">
+			</th>		
+
+<!-- 				<th align="center"><select name="searchField"> -->
+<!-- 						<option value="title">제목 -->
+<!-- 						<option value="content">내용 -->
+<!-- 				</select> <input type="text" name="searchWord"> <input type="submit" value="검색하기"></th> -->
+
 			</tr>
+		</thead>
 		</table>
 	</form>
 	<!-- 게시물 목록 테이블(표) -->
 
 
-	<table border="1" width="90%" align="center">
+	<table class="table table-hover" width="90%" align="center">
 		<!--  각 컬럼의 이름 -->
-		<tr align="center" border="1">
+		<thead>
+		<tr align="center" style="background-color:#DCDCDC;">
 			<th width="10%">번호</th>
 			<th width="50%">제목</th>
 			<th width="15%">작성자</th>
@@ -97,6 +136,7 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 			<th width="15%">작성일</th>
 			<!-- 목록의 내용 -->
 		</tr>
+		</thead>
 			<%
 			if (boardLists.isEmpty()) {
 				// 게시물이 하나도 없을 때
@@ -127,10 +167,13 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 		%>
 	</table>
 	<!--  목록 하단의 [글쓰기] 버튼 -->
-	<table border="1" width="90%" align="center">
+	<table class="table table-hover" width="90%" align="center">
+	<thead>
 		<tr align="center">
 			<!-- 페이징 처리 -->
-			<td><%=BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, request.getRequestURI())%></td>
+			<th style="border-bottom:none;"><%=BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, request.getRequestURI())%></th>
+		</tr>
+		<tr align="right">
 			<!-- 글쓰기 버튼 -->
 			<%
 				String enpcate = session.getAttribute("cate").toString();
@@ -138,19 +181,20 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 				
 			if (enpcate.equals("2")){
 			%>
-			<td>
-				<button type="button" onclick="location.href='Write.jsp';">글쓰기</button>
-			</td>
+			<th style="border-bottom:none;">
+				<button type="button" class="btn btn-primary" onclick="location.href='Write.jsp';">글쓰기</button>
+			</th>
 			<%} // cate가 1이나 3일때는 인사팀이여야만 글쓰기가 나오게.
 			else if ((enpcate.equals("1")||enpcate.equals("3")) & enpdept_kor.equals("인사팀"))  {
 			%>
-			<td>
-				<button type="button" onclick="location.href='Write.jsp';">글쓰기</button>
-			</td>
+			<th style="border-bottom:none;">
+				<button type="button" class="btn btn-primary" onclick="location.href='Write.jsp';">글쓰기</button>
+			</th>
 			<%
 			}
 			%>
 		</tr>
+	</thead>
 	</table>
 </body>
 </html>

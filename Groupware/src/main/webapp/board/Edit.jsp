@@ -31,6 +31,7 @@
 <!DOCTYPE>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시글 수정</title>
 <script type="text/javascript">
@@ -50,28 +51,33 @@
 </head>
 <body>
 <%  %>
-	<h2>회원제 게시판 - 수정하기(Edit) 현재 cate : <%= session.getAttribute("cate").toString() %></h2>
+	<h3>회원제 게시판 - 수정하기(Edit) 현재 cate : <%= session.getAttribute("cate").toString() %></h3>
 	<form name="EidtFrm" method="post" action="EditProcess.jsp" enctype="multipart/form-data" onsubmit="return validateForm(this);">
-		<table border="1" width="90%">
+		<table class="table table-hover" width="90%">
 			<tr>
 				<td>제목<input type="hidden" name="idx" value="<%= idx %>"/></td>
-				<td><input type="text" name="title" style="width: 90%;" value="<%= vo.getTitle( )%>"/></td>
+				<td><input type="text" class="form-control" name="title" style="width: 90%;" value="<%= vo.getTitle( )%>"/></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content" style="width: 90%; height: 100px;"><%= vo.getContent() %></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button type="submit">작성 완료</button>
-					<button type="reset">다시 입력</button>
-					<button type="button" onclick="location.href='List.jsp';">목록 보기</button>
-				</td>
+				<td><textarea class="form-control" name="content" style="width: 90%; height: 100px;"><%= vo.getContent() %></textarea></td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="ofile"></td>
+				<td>
+				<div class="form-group" style="float:left;">
+					<input type="file" class="form-control" name="ofile" style="width: 90%;">
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" style="border-bottom:none;">
+					<button type="submit" class="btn btn-primary">작성 완료</button>
+					<button type="reset" class="btn btn-primary">다시 입력</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='List.jsp';">목록 보기</button>
+				</td>
 			</tr>
 		</table>
+	</form>
 </html>
 <%@ include file="../Sidebar2.jsp" %>

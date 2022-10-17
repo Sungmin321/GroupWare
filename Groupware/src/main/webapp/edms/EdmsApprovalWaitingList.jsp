@@ -17,20 +17,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h2 align="center"><%= edmsdao.getName(user_code) %> 승인대기 List</h2>
+<%-- 	<h3 align="center"><%= edmsdao.getName(user_code) %> 승인대기 List</h3> --%>
+	<h3><%= edmsdao.getName(user_code) %> 승인대기 List</h3>
 	<!-- 검색폼 -->
 	<form method="get">
-		<table border="1" class="table table-dark table-striped" width="90%" align="center">
-			<tr>
-				<td align="center"><select name="searchField">
-						<option value="title">제목
-						<option value="content">내용
-				</select> <input type="text" name="searchWord"> <input type="submit" value="검색하기"></td>
+		<table class="table table-hover" width="90%" align="center">
+
+		<thead>
+			<tr align="center">
+
+				<th style="width:30%; border-bottom:none;">
+				</th>					
+
+				<th scope="col" style="width:15%; border-bottom:none;">
+				<fieldset>
+				 <div class="form-group" style="float:right;">
+					<select class="form-select" name="searchField" style="width:200px;">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+					</select>
+			 	</div>
+				</fieldset>
+				</th>
+				
+				<th scope="col" style="width:15%; border-bottom:none;">
+				<fieldset>
+				 <div class="form-group" style="float:center;">
+					<input type="text" class="form-control" name="searchWord" style="width:200px;"/>
+				 </div>
+				</fieldset>
+				</th>
+
+				<th scope="col" style="width:10%; border-bottom:none;">
+				<fieldset>
+				 <div class="form-group" style="float:left;">
+					<input type="submit" class="btn btn-outline-primary" value="검색하기"/>
+				 </div>
+				</fieldset>
+				</th>
+
+				<th style="width:30%; border-bottom:none;">
+				</th>		
+
+<!-- 				<td align="center"><select name="searchField"> -->
+<!-- 						<option value="title">제목 -->
+<!-- 						<option value="content">내용 -->
+<!-- 				</select> <input type="text" name="searchWord"> <input type="submit" value="검색하기"></td> -->
+
 			</tr>
+		</thead>
 		</table>
 	</form>
 	<!-- 게시물 목록 테이블(표) -->
@@ -39,9 +79,10 @@
 	<!-- 
 	 //번호 제목 기안자 문서유형 기안일 결재상태 기안완료일
 	 -->
-	<table border="1" class="table table-dark table-striped" width="90%" align="center">
+	<table class="table table-hover" width="90%" align="center">
+	<thead>
 		<!--  각 컬럼의 이름 -->
-		<tr>
+		<tr style="background-color:#DCDCDC;">
 			<th width="5%">번호</th>
 			<th width="30%">제목</th> 
 			<th width="10%">기안자</th> 
@@ -49,6 +90,7 @@
 			<th width="15%">기안일</th> 
 			<th width="10%">결재상태</th>
 			<th width="20%">기안완료일</th>
+	</thead>
 			<!-- 목록의 내용 -->
 
 			<%
@@ -125,10 +167,12 @@
 		%>
 	</table>
 	<!--  목록 하단의 [글쓰기] 버튼 -->
-	<table border="1" width="90%"  class="table table-dark table-striped" align="center">
+	<table class="table table-hover" width="90%" align="center">
+	<thead>
 		<tr align="right">
-			<td><button class="btn btn-primary" type="button" onclick="location.href='EdmsApproval.jsp';">전자결재 상신</button></td>
+			<td style="border-bottom:none;"><button type="button" class="btn btn-primary" onclick="location.href='EdmsApproval.jsp';">전자결재 상신</button></td>
 		</tr>
+	</thead>
 	</table>
 </body>
 </html>

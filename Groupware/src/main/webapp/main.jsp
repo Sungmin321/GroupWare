@@ -9,13 +9,23 @@
 	
 	System.out.println(boardLists.size());
 %>
-<h2>
+<!DOCTYPE>
+<html>
+<head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home</title>
+</head>
+<body>
+
+	<h3>
 		공지사항 
-	</h2>
+	</h3>
 	<!-- 게시물 목록 테이블(표) -->
-	<table border="1" width="100%" align="center">
+	<table class="table table-hover" width="100%" align="center">
+	<thead>
 		<!--  각 컬럼의 이름 -->
-		<tr align="center" border="1">
+		<tr align="center" style="background-color:#DCDCDC;">
 			<th width="10%">번호</th>
 			<th width="50%">제목</th>
 			<th width="15%">작성자</th>
@@ -23,6 +33,7 @@
 			<th width="15%">작성일</th>
 			<!-- 목록의 내용 -->
 		</tr>
+	</thead>
 			<%
 			if (boardLists.isEmpty()) {
 				// 게시물이 하나도 없을 때
@@ -57,13 +68,14 @@
 	
 	System.out.println(boardLists.size());
 %>
-<h2>
+	<h3>
 		게시판
-	</h2>
+	</h3>
 	<!-- 게시물 목록 테이블(표) -->
-	<table border="1" width="100%" align="center">
+	<table class="table table-hover" width="100%" align="center">
+	<thead>
 		<!--  각 컬럼의 이름 -->
-		<tr align="center" border="1">
+		<tr align="center" style="background-color:#DCDCDC;">
 			<th width="10%">번호</th>
 			<th width="50%">제목</th>
 			<th width="15%">작성자</th>
@@ -71,6 +83,7 @@
 			<th width="15%">작성일</th>
 			<!-- 목록의 내용 -->
 		</tr>
+	</thead>
 			<%
 			if (boardLists.isEmpty()) {
 				// 게시물이 하나도 없을 때
@@ -97,4 +110,6 @@
 	}
 	%>
 	</table>
+</body>
+</html>
 <%@ include file="./Sidebar2.jsp" %>
