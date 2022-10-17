@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="userinfo.UserInfoDAO"%>
+<%-- <%@page import="userinfo.UserInfoDAO"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- <%@ include file="../Login/IsLoggedIn.jsp" %> --%>
@@ -16,6 +16,7 @@ List<DeptPosResVO> list = new ArrayList<DeptPosResVO>();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>정보 수정</title>
 </head>
@@ -97,31 +98,41 @@ function validateForm(form){
 };
 </script>
 
-	<h2>정보 수정</h2>
+	<div style="margin:10px 5px 10px 5px;">
+	<h3>정보 수정</h3>
+	</div>
 
 	<form name="EditFrm" method="post" onsubmit="return validateForm(this);" action="EditProcess.jsp;">
 
-	<table border="1" width="90%">
+	<table class="table table-hover" style="width:500px; margin:10px 10px 10px 10px;">
 		<tr>
-			<td>이름</td>
-			<td><input type="text" id="user_name" name="user_name"/></td>
-		</tr>
-		<tr>
-			<td>아이디</td>
-			<td><input type="text" id="user_id" name="user_id"/></td>
-		</tr>
-		<tr>
-			<td>비밀번호</td>
-			<td><input type="text" id="user_pw" name="user_pw"/></td>
-		</tr>
-		<tr>
-			<td>사원 코드</td>
-			<td><input type="text" id="user_code" name="user_code"/></td>
-		</tr>
-		<tr>
-			<td>부서</td>
+			<td style="vertical-align:middle;">이름</td>
 			<td>
-				<select id="dept_id" name="dept_id">
+				<input type="text" class="form-control" id="user_name" name="user_name" style="width:70%;"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:middle;">아이디</td>
+			<td>
+				<input type="text" class="form-control" id="user_id" name="user_id"style="width:70%;"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:middle;">비밀번호</td>
+			<td>
+			<input type="text" class="form-control" id="user_pw" name="user_pw"style="width:70%;"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:middle;">사원 코드</td>
+			<td>
+			<input type="text" class="form-control" id="user_code" name="user_code"style="width:70%;"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:middle;">부서</td>
+			<td>
+				<select class="form-select" id="dept_id" name="dept_id"style="width:70%;">
 <%
 list = dao.selectList("department2");
 
@@ -135,9 +146,9 @@ for(DeptPosResVO vo : list){
 			</td>
 		</tr>
 		<tr>
-			<td>직급</td>
+			<td style="vertical-align:middle;">직급</td>
 			<td>
-				<select id="pos_id" name="pos_id">
+				<select class="form-select" id="pos_id" name="pos_id"style="width:70%;">
 <%
 list = dao.selectList("jobposition");
 
@@ -151,9 +162,9 @@ for(DeptPosResVO vo : list){
 			</td>
 		</tr>
 		<tr>
-			<td>직책</td>
+			<td style="vertical-align:middle;">직책</td>
 			<td>
-				<select id="res_id" name="res_id">
+				<select class="form-select" id="res_id" name="res_id"style="width:70%;">
 					<option value="0">없음</option>
 <%
 list = dao.selectList("responsibility");
@@ -168,14 +179,16 @@ for(DeptPosResVO vo : list){
 			</td>
 		</tr>
 	</table>
-	
-	<table width="90%">
+
+	<div style="margin:5px 5px 5px 5px;">
+	<table style="width:500px; margin:10px 10px 10px 10px;">
 		<tr>
 			<td>
-				<input type="submit" value="수정"/>
+				<input type="submit" class="btn btn-primary" value="수정"/>
 			</td>
 		</tr>
 	</table>
+	</div>	
 
 	</form>
 	

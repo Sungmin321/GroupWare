@@ -8,6 +8,7 @@
     pageEncoding="UTF-8"%>
 <%-- <%@ include file="../Login/IsLoggedIn.jsp" %>     --%>
 <%
+// UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoDAO dao = new UserInfoDAO();
 Map<String, Object> map = new HashMap<String, Object>();
 
@@ -38,11 +39,11 @@ List<UserInfoKorVO> list = dao.findAll(map);
 			alert("정보를 수정할 사원을 선택하세요.");
 			return false;
 		}
-		window.open("<%= request.getContextPath() %>/hrms/Edit.jsp", "정보 수정", "width=600, height=400")
+		window.open("<%= request.getContextPath() %>/hrms/Edit.jsp", "정보 수정", "width=550, height=550, resizable=no")
 	};
 	
 	function addUser(){
-		window.open("<%= request.getContextPath() %>/hrms/Add.jsp", "직원 추가", "width=600, height=400")
+		window.open("<%= request.getContextPath() %>/hrms/Add.jsp", "직원 추가", "width=550, height=550, resizable=no")
 	};
 	
 	function getRadioValue(event){

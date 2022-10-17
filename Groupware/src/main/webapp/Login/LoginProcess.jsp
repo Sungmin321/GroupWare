@@ -6,6 +6,7 @@
 String user_id = request.getParameter("user_id");
 String user_pw = request.getParameter("user_pw");
 
+// UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoDAO dao = new UserInfoDAO();
 UserInfoKorVO vo = dao.getUserInfoVO(user_id, user_pw);
 dao.close();

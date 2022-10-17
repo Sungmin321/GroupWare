@@ -116,7 +116,7 @@ List<BoardVO> boardLists = dao.selectListPage(param, cate);
 		%>
 		<tr align="center">
 			<td><%=virtualNum%></td>
-			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>&i=<%=virtualNum%>"><%=vo.getTitle()%></a></td>
+			<td align="left"><a href="View.jsp?idx=<%=vo.getIdx()%>&i=<%=virtualNum%>&cate<%=cate%>"><%=vo.getTitle()%></a></td>
 			<td align="center"><%=dao.getName(vo.getUsercode())%></td>
 			<td align="center"><%=vo.getVisitcount()%></td>
 			<td align="center"><%=vo.getPostdate()%></td>

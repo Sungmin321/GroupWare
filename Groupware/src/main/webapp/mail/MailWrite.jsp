@@ -37,6 +37,7 @@ fDao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>메일쓰기</title>
 </head>
@@ -117,24 +118,24 @@ function delete_btn_click(){
 };
 
 function search_btn(){
-	childWindow = window.open("<%= request.getContextPath() %>/mail/AddRecipient.jsp?status=<%= request.getParameter("status")%>", "받는사람 추가", "width=600, height=400");
+	childWindow = window.open("<%= request.getContextPath() %>/mail/AddRecipient.jsp?status=<%= request.getParameter("status")%>", "받는사람 추가", "width=600, height=550");
 };
 
 </script>
 
-	<h2>메일쓰기</h2>
+	<h3>메일쓰기</h3>
 	
 	<input type="hidden" id="childSelected" name="childSelected"/>
 
 	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="MailWriteProcess.jsp">
 
-	<table width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
-			<td>
+			<td style="border-bottom:none;">
 				<input type="hidden" name="statusValue" value="<%= request.getParameter("status") %>"/>
 				<input type="hidden" name="idxValue" value="<%= request.getParameter("idx")%>"/>
-				<input type="submit" name="submitValue" value="보내기"/>
-				<input type="submit" name="submitValue" value="임시저장"/>
+				<input type="submit" class="btn btn-primary" name="submitValue" value="보내기"/>
+				<input type="submit" class="btn btn-primary" name="submitValue" value="임시저장"/>
 			</td>
 		</tr>
 	</table>
@@ -146,36 +147,44 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 // 	UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 // 	int user_code = uVo.getUser_code();
 %>
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
-			<td width="15%">보내는사람</td>
+			<td width="15%" style="vertical-align:middle;">보내는사람</td>
 			<td>
-				<input type="text" name="sender" value="<%= user_code %>" style="width: 90%;" readonly/>
+				<input type="text" class="form-control" name="sender" value="<%= user_code %>" style="width: 30%;" readonly/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">받는사람</td>
-			<td>
-				<input type="text" name="recipients1" id="recipients1" style="width: 90%;" readonly/>
-				<input type="button" value="찾기" onclick="search_btn();"/>
+			<td width="15%" style="vertical-align:middle;">받는사람</td>
+			<td width="85%">
+			<div class="form-group" style="float:left; margin-right:10px; width=50%;">
+				<input type="text" class="form-control" name="recipients1" id="recipients1" style="width: 100%;" readonly/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<input type="button" class="btn btn-dark" value="찾기" onclick="search_btn();"/>
+			</div>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">제목</td>
+			<td width="15%" style="vertical-align:middle;">제목</td>
 			<td>
-				<input type="text" name="title" style="width: 90%;"/>
+				<input type="text" class="form-control" name="title" style="width: 90%;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">첨부파일</td>
-			<td>
-				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
-				<Button type="button" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			<td width="15%" style="vertical-align:middle;">첨부파일</td>
+			<td width="85%">
+			<div class="form-group" style="float:left; margin-right:10px;">
+				<input type="file" class="form-control" id="attachedFile" name="attachedFile" style="width: 100%;"/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<Button type="button" class="btn btn-dark" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			</div>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="content" style="width: 100%; height: 300px;"></textarea>
+				<textarea class="form-control" name="content" style="width: 100%; height: 300px;"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -194,40 +203,56 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 
 // 	fDao.close();
 %>
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
-			<td width="15%">보내는사람</td>
+			<td width="15%" style="vertical-align:middle;">보내는사람</td>
 			<td>
-				<input type="text" name="sender" value="<%= vo.getSender() %>" style="width: 90%;" readonly/>
+				<input type="text" class="form-control" name="sender" value="<%= vo.getSender() %>" style="width: 30%;" readonly/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">받는사람</td>
-			<td>
-				<input type="text" name="recipients4" id="recipients4" value="<%= vo.getRecipients() %>" style="width: 90%;"/>
-				<input type="button" value="찾기" onclick="search_btn();"/>
+			<td width="15%" style="vertical-align:middle;">받는사람</td>
+			<td width="85%">
+			<div class="form-group" style="float:left; margin-right:10px; width=50%;">
+				<input type="text" class="form-control" name="recipients4" id="recipients4" value="<%= vo.getRecipients() %>" style="width: 100%;" readonly/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<input type="button" class="btn btn-dark" value="찾기" onclick="search_btn();"/>
+			</div>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">제목</td>
+			<td width="15%" style="vertical-align:middle;">제목</td>
 			<td>
-				<input type="text" name="title" value="<%= vo.getTitle() %>" style="width: 90%;"/>
+				<input type="text" class="form-control" name="title" value="<%= vo.getTitle() %>" style="width: 90%;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">첨부파일</td>
-			<td>
+			<td width="15%" style="vertical-align:middle;">첨부파일</td>
+			<td width="85%">
 <%
 	if(fVo.getOfile() != null){
 %>
-				<input type="button" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
-				<input type="button" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
-				<input type="text" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
+			<div class="form-group" style="float:left; margin-right:10px; width=50%;">
+				<input type="text" class="form-control" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
+			</div>
+			<div class="form-group" style="float:left; margin-right:10px; width=20%;">
+				<input type="button" class="btn btn-dark" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
+			</div>
+			<div class="form-group" style="float:left; width=10%;">
+				<input type="button" class="btn btn-dark" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
+			</div>
+			<div class="form-group" style="float:left; width=20%;">
+			</div>
 <%
 	}
 %>
-				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
-				<Button type="button" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			<div class="form-group" style="float:left; margin-right:10px;">
+				<input type="file" class="form-control" id="attachedFile" name="attachedFile" style="width: 100%;"/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<Button type="button" class="btn btn-dark" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			</div>
 			</td>
 		</tr>
 		<tr>
@@ -235,11 +260,11 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 <%
 	if(vo.getContent() != null){
 %>
-				<textarea name="content" style="width: 100%; height: 300px;"><%= vo.getContent().replace("\r\n", "<br/>") %></textarea>
+				<textarea class="form-control" name="content" style="width: 100%; height: 300px;"><%= vo.getContent().replace("\r\n", "<br/>") %></textarea>
 <%
 	}else{
 %>
-				<textarea name="content" style="width: 100%; height: 300px;"></textarea>
+				<textarea class="form-control" name="content" style="width: 100%; height: 300px;"></textarea>
 <%
 	}
 %>

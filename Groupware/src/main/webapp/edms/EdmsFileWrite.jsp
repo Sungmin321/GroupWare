@@ -16,6 +16,7 @@ uDao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>전자결재 - 자료실 글쓰기</title>
 </head>
@@ -43,40 +44,44 @@ function deleteFile(){
 	<input type="hidden" name="user_code" value="<%= user_code %>"/>
 	<input type="hidden" name="cate" value="3"/>
 	
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
-			<td width="15%">작성자</td>
+			<td width="15%" style="vertical-align:middle;">작성자</td>
 			<td>
-				<input type="text" name="user_name" value="<%= user_name %>" style="width:90%;" readonly/>
+				<input type="text" class="form-control" name="user_name" value="<%= user_name %>" style="width:90%;" readonly/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">제목</td>
+			<td width="15%" style="vertical-align:middle;">제목</td>
 			<td>
-				<input type="text" name="title" style="width: 90%;"/>
+				<input type="text" class="form-control" name="title" style="width: 90%;"/>
 			</td>
 		</tr>
 		<tr>
-			<td width="15%">첨부파일</td>
-			<td>
-				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
-				<Button type="button" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			<td width="15%" style="vertical-align:middle;">첨부파일</td>
+			<td width="85%">
+			<div class="form-group" style="float:left; margin-right:10px;">
+				<input type="file" class="form-control" id="attachedFile" name="attachedFile" style="width:100%;"/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<Button type="button" class="btn btn-dark" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			</div>
 			</td>
-		</tr>
 		<tr>
-			<td width="15%">내용</td>
+		</tr>
+			<td width="15%" style="vertical-align:middle;">내용</td>
 			<td>
-				<textarea name="content" style="width: 100%; height: 300px;"></textarea>
+				<textarea class="form-control" name="content" style="width: 100%; height: 300px;"></textarea>
 			</td>
 		</tr>
 	</table>
 	
-	<table width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
-			<td align="center">
-				<input type="submit" name="submitValue" value="작성완료"/>
-				<button type="reset">다시 입력</button>
-				<button type="button" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
+			<td align="center" style="border-bottom:none;">
+				<input type="submit" class="btn btn-primary" name="submitValue" value="작성완료"/>
+				<button type="reset" class="btn btn-primary">다시 입력</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
 			</td>
 		</tr>
 	</table>

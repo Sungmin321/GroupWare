@@ -12,6 +12,7 @@ List<DeptPosResVO> list = new ArrayList<DeptPosResVO>();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>직원 추가</title>
 </head>
@@ -53,31 +54,33 @@ function validateForm(form){
 };
 </script>
 
-	<h2>직원 추가하기</h2>
+	<div style="margin:10px 5px 10px 5px;">
+	<h3>직원 추가하기</h3>
+	</div>
 
 	<form name="addFrm" method="post" onsubmit="return validateForm(this);" action="AddProcess.jsp;">
 
-	<table border="1" width="90%">
+	<table class="table table-hover" style="width:500px; margin:10px 10px 10px 10px;">
 		<tr>
-			<td>이름</td>
-			<td><input type="text" name="user_name"/></td>
+			<td style="vertical-align:middle;">이름</td>
+			<td><input type="text" class="form-control" name="user_name" style="width:70%;"/></td>
 		</tr>
 		<tr>
-			<td>아이디</td>
-			<td><input type="text" name="user_id"/></td>
+			<td style="vertical-align:middle;">아이디</td>
+			<td><input type="text" class="form-control" name="user_id" style="width:70%;"/></td>
 		</tr>
 		<tr>
-			<td>비밀번호</td>
-			<td><input type="text" name="user_pw"/></td>
+			<td style="vertical-align:middle;">비밀번호</td>
+			<td><input type="text" class="form-control" name="user_pw" style="width:70%;"/></td>
 		</tr>
 		<tr>
-			<td>사원 코드</td>
-			<td><input type="text" name="user_code"/></td>
+			<td style="vertical-align:middle;">사원 코드</td>
+			<td><input type="text" class="form-control" name="user_code" style="width:70%;"/></td>
 		</tr>
 		<tr>
-			<td>부서</td>
+			<td style="vertical-align:middle;">부서</td>
 			<td>
-				<select name="dept_id">
+				<select class="form-select" name="dept_id" style="width:70%;">
 <%
 list = dao.selectList("department2");
 
@@ -91,9 +94,9 @@ for(DeptPosResVO vo : list){
 			</td>
 		</tr>
 		<tr>
-			<td>직급</td>
+			<td style="vertical-align:middle;">직급</td>
 			<td>
-				<select name="pos_id">
+				<select class="form-select" name="pos_id" style="width:70%;">
 <%
 list = dao.selectList("jobposition");
 
@@ -107,9 +110,9 @@ for(DeptPosResVO vo : list){
 			</td>
 		</tr>
 		<tr>
-			<td>직책</td>
+			<td style="vertical-align:middle;">직책</td>
 			<td>
-				<select name="res_id">
+				<select class="form-select" name="res_id" style="width:70%;">
 					<option value="0">없음</option>
 <%
 list = dao.selectList("responsibility");
@@ -125,13 +128,15 @@ for(DeptPosResVO vo : list){
 		</tr>
 	</table>
 	
-	<table width="90%">
+	<div style="margin:5px 5px 5px 5px;">
+	<table style="width:500px; margin:10px 10px 10px 10px;">
 		<tr>
 			<td>
-				<input type="submit" value="추가"/>
+				<input type="submit" class="btn btn-primary" value="추가"/>
 			</td>
 		</tr>
 	</table>
+	</div>
 
 	</form>
 

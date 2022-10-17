@@ -10,11 +10,17 @@
 	response.setContentType("text/html;charset=utf-8");
 	
 	if( session.getAttribute("cate") == null ){ // 세션에 값이 없거나 -> main 화면에서 바로 들어온 경우. main에서 받아서 세션에 저장시켜준다.
+		System.out.println("첫번째 조건 : 세션에 카테값이 null 일때 request에 cate값을 넣어주기. request cate : "+request.getParameter("cate"));
 		String cate = request.getParameter("cate");
 	
 		session.setAttribute("cate", cate);
-	}else if ( !session.getAttribute("cate").toString().equals(request.getParameter("cate")) ){ //세션의 cate 값과 request의 cate값이 같은경우.
-		session.setAttribute("cate", request.getParameter("cate"));
+	}else if ( !(session.getAttribute("cate").toString().equals(request.getParameter("cate"))) ){ //세션의 cate 값과 request의 cate값이 같은경우.
+		System.out.println("두번째 조건 : 세션의 값과 request의 cate값이 다를때. request cate : "+request.getParameter("cate"));
+		
+		if(request.getParameter("cate") != null){ // 널이 아니면 request의 정보를 session에 저장해라.
+			String cate = request.getParameter("cate");
+			session.setAttribute("cate", cate);
+		}
 	}
 	
 	BoardDAO bdao = BoardDAO.getInstance();

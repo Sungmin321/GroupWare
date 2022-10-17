@@ -37,6 +37,7 @@ fDao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>전자결재 - 자료실 상세보기</title>
 </head>
@@ -54,11 +55,11 @@ function deletePost(){
 };
 </script>
 
-	<h2>상세보기</h2>
+	<h3>상세보기</h3>
 	
 	<form name="viewFrm">
 	<input type="hidden" name="idx" value="<%= idx %>"/>
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
 			<td align="center" width="15%">작성자</td>
 			<td><%= vo.getUser_name() %></td>
@@ -84,25 +85,27 @@ if(fVo.getOfile() != null){
 }
 %>
 		<tr>
-			<td align="center" width="15%" height="100">내용</td>
+			<td align="center" width="15%" height="300">내용</td>
 			<td colspan="3"><%= vo.getContent() %></td>
 		</tr>
 	</table>
 	
-	<table width="90%">
+	<table class="table table-hover" width="90%">
+	<thead>
 		<tr align="center">
-			<td>
+			<th style="border-bottom:none;">
 <%
 if(session.getAttribute("user_id") != null && user_code.equals(vo.getUsercode())){
 %>
-				<button type="button" onclick="location.href='EdmsFileEdit.jsp?idx=<%= vo.getIdx() %>';">수정하기</button>
-				<button type="button" onclick="deletePost();">삭제하기</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileEdit.jsp?idx=<%= vo.getIdx() %>';">수정하기</button>
+				<button type="button" class="btn btn-primary" onclick="deletePost();">삭제하기</button>
 <%
 }
 %>
-				<button type="button" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
-			</td>
+				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
+			</th>
 		</tr>
+	</thead>
 	</table>
 	</form>
 </body>

@@ -1,12 +1,22 @@
 package userinfo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import dbcon.DBConnPool;
 
 public class UserInfoDAO extends DBConnPool {
+//	private static UserInfoDAO instance = new UserInfoDAO();
+//
+//	private UserInfoDAO() {
+//		super();
+//	}
+//
+//	public static UserInfoDAO getInstance() {
+//		return instance;
+//	}
+	
 	public UserInfoDAO() {
 		super();
 	}
@@ -37,6 +47,18 @@ public class UserInfoDAO extends DBConnPool {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+				if(rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return vo;
@@ -63,6 +85,18 @@ public class UserInfoDAO extends DBConnPool {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+				if(rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return vo;
@@ -102,6 +136,18 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(stmt != null) {
+					stmt.close();
+				}
+				if(rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return list;
@@ -129,6 +175,15 @@ public class UserInfoDAO extends DBConnPool {
 
 		}catch(Exception e){
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return result;
@@ -155,6 +210,15 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return result;
@@ -186,6 +250,15 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 //		System.out.println(query);
@@ -218,6 +291,15 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return result;

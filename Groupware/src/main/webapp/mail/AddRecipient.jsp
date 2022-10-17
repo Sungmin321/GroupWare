@@ -8,6 +8,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 
+// UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoDAO dao = new UserInfoDAO();
 Map<String, Object> map = new HashMap<String, Object>();
 
@@ -23,6 +24,7 @@ List<UserInfoKorVO> list = dao.findAll(map);
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>받는사람 추가</title>
 </head>
@@ -55,12 +57,12 @@ function deleteRecipients(){
 };
 
 function validateForm(form){
-	if(!textFrm.recipients.value){
+	var v = form.submitName.value;
+
+	if(v != "검색" && !textFrm.recipients.value){
 		alert("받는 사람을 한 명 이상 선택하세요.");
 		return false;
 	}
-	
-	var v = form.submitName.value;
 	
 	if(v == "검색"){
 		form.action = "AddRecipient.jsp";
@@ -76,48 +78,85 @@ function validateForm(form){
 
 </script>
 
-	<h2>받는사람 추가</h2>
-<!-- 	<form name="textFrm" method="get"> -->
+	<div style="margin:10px 5px 10px 5px;">
+	<h3>받는사람 추가</h3>
+	</div>
+	
 	<form name="textFrm" method="post" onsubmit="return validateForm(this);">
 	<input type="hidden" name="status" value="<%= request.getParameter("status") %>"/>
-	<table width="90%">
+	<table class="table table-hover" style="width:500px; margin:10px 10px 10px 10px;">
+	<thead>
 		<tr>
-			<td>받는사람 : </td>
+			<th style="border-bottom:none;">받는사람 : </th>
 		</tr>
 		<tr>
-			<td>
-				<input type="text" id="recipients" name="recipients" style="width:400px; height:50px;" readonly/>
-				<input type="button" id="deleteText" name="deleteText" value="모두 삭제" onclick="deleteRecipients();"/>
-			</td>
+			<th style="border-bottom:none;">
+			<div class="form-group" style="float:left; margin-right:10px; width=80%;">
+				<input type="text" class="form-control" id="recipients" name="recipients" style="width:350px; height:100px;" readonly/>
+			</div>
+			<div class="form-group" style="float:left; width=20%;">
+				<input type="button" class="btn btn-dark"  id="deleteText" name="deleteText" value="모두 삭제" onclick="deleteRecipients();"/>
+			</div>
+			</th>
 		</tr>
+	</thead>
 	</table>
-	<table border="1" width="90%">
-		<tr>
-			<td align="center">
-				<select name="searchField">
+	<table class="table table-hover"  style="width:500px; margin:10px 10px 10px 10px;">
+	<thead>
+		<tr align="center">
+		
+			<th style="width:30%; border-bottom:none;">
+			</th>
+
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:right;">
+				<select class="form-select" name="searchField" style="width:200px;">
 					<option value="dept_name_kor">부서명</option>
 					<option value="user_name">이름</option>
 					<option value="user_code">사원코드</option>
 					<option value="res_name_kor">직책</option>
 				</select>
-				<input type="text" name="searchWord"/>
-				<input type="submit" id="search_btn" name="submitName" value="검색"/>
-			</td>
+			 </div>
+			</fieldset>
+			</th>
+
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:center;">
+				<input type="text" class="form-control" name="searchWord" style="width:200px;"/>
+			 </div>
+			</fieldset>
+			</th>
+			
+			<th scope="col" style="width:10%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:left;">
+				<input type="submit" class="btn btn-outline-primary" id="search_btn" name="submitName" value="검색"/>
+			 </div>
+			</fieldset>
+			</th>	
+		
+			<th style="width:30%; border-bottom:none;">
+			</th>
+
 		</tr>
+	</thead>
 	</table>
 	</form>
 
-<!-- 	<form name="addFrm" method="post" onsubmit="return validateForm();" action="MailWrite.jsp;"> -->
 	<form name="addFrm" method="post" onsubmit="return validateForm(this);">
-	<table border="1" width="90%">
+	<table class="table table-hover"  style="width:500px; margin:10px 10px 10px 10px;">
+	<thead>
 		<tr align="center">
-			<td></td>
-			<td>이름</td>
-			<td>사원코드</td>
-			<td>부서</td>
-			<td>직급</td>
-			<td>직책</td>
+			<th></th>
+			<th>이름</th>
+			<th>사원코드</th>
+			<th>부서</th>
+			<th>직급</th>
+			<th>직책</th>
 		</tr>
+	</thead>
 <%
 if(list.isEmpty()){
 %>
@@ -155,12 +194,10 @@ if(list.isEmpty()){
 %>
 		</tr>
 		<tr>
-			<td align="center" colspan="6">
+			<td align="center" colspan="6" style="border-bottom:none;">
 				<input type="hidden" id="status" name="status" value="<%= request.getParameter("status") %>"/>
 				<input type="hidden" id="recipientsValue" name="recipientsValue"/>
-<!-- 				<input type="button" id="btn" name="btn" value="선택 완료" onclick="closeThisWindow();"/> -->
-<!-- 				<input type="button" id="btn" name="btn" value="선택 완료" onclick="btn_click(this);"/> -->
-				<input type="submit" id="close_btn" name="submitName" value="선택 완료"/>
+				<input type="submit" class="btn btn-primary" id="close_btn" name="submitName" value="선택 완료"/>
 			</td>
 		</tr>
 	</table>	

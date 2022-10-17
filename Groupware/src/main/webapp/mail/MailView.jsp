@@ -37,6 +37,7 @@ fDao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>메일 상세 보기</title>
 <style>
@@ -44,16 +45,20 @@ fDao.close();
 </style>
 </head>
 <body>
-	<h2>메일 상세 보기</h2>
+	<h3>메일 상세 보기</h3>
 	<form>
 	
-		<table widty="90%">
+		<table class="table table-hover" width="90%">
+		<thead>
 			<tr>
-				<td><button type="button" onclick="location.href='MailList.jsp?status=<%= request.getParameter("status") %>';">목록보기</button></td>
+				<td  style="border-bottom:none;">
+					<button type="button" class="btn btn-primary" onclick="location.href='MailList.jsp?status=<%= request.getParameter("status") %>';">목록보기</button>
+				</td>
 			</tr>
+		</thead>
 		</table>
 	
-		<table border="1" width="90%">
+		<table class="table table-hover" width="90%">
 			<tr align="center">
 				<td>제목</td>
 				<td colspan="3" align="left"><%= vo.getTitle() %></td>

@@ -20,6 +20,7 @@ vo.setDept_id(dept_id);
 vo.setPos_id(pos_id);
 vo.setRes_id(res_id);
 
+// UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoDAO dao = new UserInfoDAO();
 
 int result;

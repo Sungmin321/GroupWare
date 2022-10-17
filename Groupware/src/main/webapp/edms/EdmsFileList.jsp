@@ -9,9 +9,9 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-//String edmsFile = "";
-//BoardDAO dao = new BoardDAO(edmsFile);
- BoardDAO dao = BoardDAO.getInstance();
+// String edmsFile = "";
+// BoardDAO dao = new BoardDAO(edmsFile);
+BoardDAO dao = BoardDAO.getInstance();
 
 Map<String, Object> map = new HashMap<String, Object>();
 String searchField = request.getParameter("searchField");
@@ -34,35 +34,67 @@ List<BoardVO> boardLists = dao.selectList(map, cate);
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
+<meta charset="UTF-8">
 <meta charset="UTF-8">
 <title>전자결재 - 자료실</title>
 </head>
 <body>
-	<h2>자료실</h2>
+	<h3>자료실</h3>
 	<form method="get">
-	<table border="1" width="90%">
-		<tr>
-			<td align="center">
-				<select name="searchField">
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="center">
+
+			<th style="width:30%; border-bottom:none;">
+			</th>	
+			
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:right;">
+				<select class="form-select" name="searchField" style="width:200px;">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="user_name">작성자</option>
 				</select>
-				<input type="text" name="searchWord"/>
-				<input type="submit" value="검색"/>
-			</td>
+			 </div>
+			</fieldset>
+			</th>		
+		
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:center;">
+				<input type="text" class="form-control" name="searchWord" style="width:200px;"/>
+			 </div>
+			</fieldset>
+			</th>		
+			
+			<th scope="col" style="width:10%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:left;">
+				<input type="submit" class="btn btn-outline-primary" value="검색"/>
+			 </div>
+			</fieldset>
+			</th>
+		
+			<th style="width:30%; border-bottom:none;">
+			</th>
+			
 		</tr>
+	</thead>
 	</table>
 	</form>
 	
-	<table border="1" width="90%">
-		<tr>
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="center" style="background-color:#DCDCDC;">
 			<th width="10%">번호</th>
 			<th width="50%">제목</th>
 			<th width="15%">작성자</th>
 			<th width="10%">조회수</th>
 			<th width="15%">작성일</th>
 		</tr>
+	</thead>
 <%
 if(boardLists.isEmpty()){	
 %>		<tr>
@@ -89,10 +121,10 @@ if(boardLists.isEmpty()){
 %>		
 	</table>
 	
-	<table width="90%">
+	<table class="table table-hover" width="90%">
 		<tr align="right">
-			<td>
-				<button type="button" onclick="location.href='EdmsFileWrite.jsp';">글쓰기</button>
+			<td style="border-bottom:none;">
+				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileWrite.jsp';">글쓰기</button>
 			</td>
 		</tr>
 	</table>

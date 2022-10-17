@@ -56,6 +56,7 @@ dao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>메일함</title>
 </head>
@@ -135,76 +136,119 @@ function permanentlyDelete_btn(){
 <%
 if(status.equals("2")){
 %>
-	<h2>받은메일함</h2>
+	<h3>받은메일함</h3>
 <%
 }else if(status.equals("3")){
 %>
-	<h2>보낸메일함</h2>
+	<h3>보낸메일함</h3>
 <%
 }else if(status.equals("4")){
 %>
-	<h2>임시보관함</h2>
+	<h3>임시보관함</h3>
 <%
 }else if(status.equals("5")){
 %>
-	<h2>휴지통</h2>
+	<h3>휴지통</h3>
 <%
 }
 %>
 	<form method="get" name="btn_frm">
 	<input type="hidden" name="status" value="<%=request.getParameter("status")%>"/>
 	<input type="hidden" id="chk_value" name="chk_value"/>
-	<table width="90%">
+	<table class="table table-hover" width="90%">
+	<thead>
 		<tr>
-			<td>
+			<th style="border-bottom:none;">
 <!-- 				삭제 (받은메일함, 보낸메일함, 임시보관함) -->
 <!-- 				완전삭제, 복원 (휴지통만) -->
 <%
 // if(status == 2 || status == 3 || status == 4){
 if(status.equals("2") || status.equals("3") || status.equals("4")){
 %>
-				<button type="button" onclick="delete_btn();">삭제</button>
+				<button type="button" class="btn btn-primary" onclick="delete_btn();">삭제</button>
 <%
 }
 // if(status == 5){
 if(status.equals("5")){
 %>
-				<button type="button" onclick="permanentlyDelete_btn();">완전삭제</button>
-				<button type="button" onclick="restore_btn();">복원</button>
+				<button type="button" class="btn btn-primary" onclick="permanentlyDelete_btn();">완전삭제</button>
+				<button type="button" class="btn btn-primary" onclick="restore_btn();">복원</button>
 <%
 }
 %>
-			</td>
+			</th>
 		</tr>
+	</thead>
 	</table>
 	</form>
 	
 	<form method="get">
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
+	<thead>
 		<tr align="center">
-			<td>
+		
+			<th style="width:30%; border-bottom:none;">
+			</th>		
+
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:right;">
 				<input type="hidden" name="status" value="<%=request.getParameter("status")%>"/>
-				<select name="searchField">
+				<select class="form-select" name="searchField" style="width:200px;">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="sendder">보낸사람</option>
 				</select>
-				<input type="text" name="searchWord"/>
-				<input type="submit" value="검색"/>
-			</td>		
+			 </div>
+			</fieldset>
+			</th>
+
+			<th scope="col" style="width:15%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:center;">
+				<input type="text" class="form-control" name="searchWord" style="width:200px;"/>
+			 </div>
+			</fieldset>
+			</th>
+
+			<th scope="col" style="width:10%; border-bottom:none;">
+			<fieldset>
+			 <div class="form-group" style="float:left;">
+				<input type="submit" class="btn btn-outline-primary" value="검색"/>
+			 </div>
+			</fieldset>
+			</th>
+			
+<!-- 			<td style="border-bottom:none;"> -->
+<%-- 				<input type="hidden" name="status" value="<%=request.getParameter("status")%>"/> --%>
+<!-- 				<select name="searchField"> -->
+<!-- 					<option value="title">제목</option> -->
+<!-- 					<option value="content">내용</option> -->
+<!-- 					<option value="sendder">보낸사람</option> -->
+<!-- 				</select> -->
+<!-- 				<input type="text" name="searchWord"/> -->
+<!-- 				<input type="submit" value="검색"/> -->
+<!-- 			</td>		 -->
+			
+			<th style="width:30%; border-bottom:none;">
+			</th>		
+
 		</tr>
+	</thead>
 	</table>
 	</form>
 	
-	<table border="1" width="90%">
-		<tr align="center">
-			<td>
+	<table class="table table-hover" width="90%">
+	<thead>
+		<tr align="center" style="background-color:#DCDCDC;">
+			<th>
 				<input type="checkbox" id="checkAll"/>
-			</td>
-			<td>보낸이</td>
-			<td>제목</td>
-			<td>보낸 날짜</td>
+			</th>
+			<th>보낸이</td>
+			<th>제목</td>
+			<th>보낸 날짜</td>
 		</tr>
+	</thead>
 <%
 if(list.isEmpty()){
 %>
