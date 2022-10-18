@@ -6,6 +6,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="attachedfile.AttachedFileDAO"%>
 <%@page import="attachedfile.AttachedFileVO"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <% 
 	request.setCharacterEncoding("utf-8");
 	response.setContentType("text/html;charset=utf-8");

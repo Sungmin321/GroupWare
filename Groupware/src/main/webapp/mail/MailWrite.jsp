@@ -7,15 +7,17 @@
 <%@page import="mail.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../Login/IsLoggedIn.jsp" %>    
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <%
 request.setCharacterEncoding("utf-8");
 
 int status = Integer.parseInt(request.getParameter("status"));
-System.out.println("write 페이지 14행 status : " + status);
 
 // status == 1
-String user_id = session.getAttribute("user_id").toString();
+String user_id = "";
+if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
+	user_id = session.getAttribute("user_id").toString();
+}
 UserInfoDAO uDao = new UserInfoDAO();
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
@@ -130,14 +132,16 @@ function search_btn(){
 	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="MailWriteProcess.jsp">
 
 	<table class="table table-hover" width="90%">
+	<thead>
 		<tr>
-			<td style="border-bottom:none;">
+			<th style="border-bottom:none;">
 				<input type="hidden" name="statusValue" value="<%= request.getParameter("status") %>"/>
 				<input type="hidden" name="idxValue" value="<%= request.getParameter("idx")%>"/>
 				<input type="submit" class="btn btn-primary" name="submitValue" value="보내기"/>
 				<input type="submit" class="btn btn-primary" name="submitValue" value="임시저장"/>
-			</td>
+			</th>
 		</tr>
+	</thead>
 	</table>
 	
 <%
@@ -149,8 +153,8 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 %>
 	<table class="table table-hover" width="90%">
 		<tr>
-			<td width="15%" style="vertical-align:middle;">보내는사람</td>
-			<td>
+			<td onmouseover="this.style.background='white'" width="15%" style="vertical-align:middle;">보내는사람</td>
+			<td onmouseover="this.style.background='white'">
 				<input type="text" class="form-control" name="sender" value="<%= user_code %>" style="width: 30%;" readonly/>
 			</td>
 		</tr>

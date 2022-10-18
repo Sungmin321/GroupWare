@@ -42,7 +42,6 @@ if(result == 1){
 		location.href='List.jsp';
 	</script>
 <% 
-// 	response.sendRedirect("List.jsp");
 }else{
 %>
 	<script>

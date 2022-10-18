@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="edms.*" %>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance();
 %>
 <% 

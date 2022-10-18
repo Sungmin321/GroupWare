@@ -5,6 +5,7 @@
 <%@ page import="edms.*" %>
 <%@ page import="attachedfile.*" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance(); %>
 <% 	
 		request.setCharacterEncoding("utf-8");
@@ -52,41 +53,42 @@ case "3" :
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1" width="90%" align="center">
-		<tr>
-			<th width="30%">문서번호</th>
-			<td><%= number %></td>
+	<table class="table table-hover" width="90%" align="center">
+		<tr align="center">
+			<th width="25%">문서번호</th>
+			<td align="left"><%= number %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>제목</th>
-			<td><%= evo.getTitle() %></td>
+			<td align="left"><%= evo.getTitle() %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>기안자</th>
-			<td><%= edmsdao.getName(evo.getUser_code()) %></td>
+			<td align="left"><%= edmsdao.getName(evo.getUser_code()) %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>문서양식</th>
-			<td><%= doctypekr %></td>
+			<td align="left"><%= doctypekr %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>기안일</th>
-			<td><%= evo.getPostdate() %></td>
+			<td align="left"><%= evo.getPostdate() %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>결재상태</th>
-			<td><%= statuskr %></td>
+			<td align="left"><%= statuskr %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>기안완료일</th>
-			<td><%= evo.getLastdate()==null?"미완료":evo.getLastdate() %></td>
+			<td align="left"><%= evo.getLastdate()==null?"미완료":evo.getLastdate() %></td>
 		</tr>
-		<tr>
-		<th colspan="2">결재 내용</th>
+		<tr align="center">
+			<th colspan="2">결재 내용</th>
 		</tr>
 		<% String Contents[] = evo.getContent().split("`"); 
 			for (int i = 0; i<Contents.length ; i++){
@@ -98,16 +100,16 @@ case "3" :
 			}
 		%>
 		<% if(fVo.getOfile() != null) { %>
-		<tr>
-			<th>첨부파일</th>
-			<td>
+		<tr align="center">
+			<th style="border-bottom:none;">첨부파일</th>
+			<td style="border-bottom:none;">
 			<a href="../attachedfile/Download.jsp?oName=
 			<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %>
 			</a>
 			</td>
 		</tr>
 		<% }else { %>
-		<tr>
+		<tr align="center">
 			<th>첨부파일</th>
 			<td>
 			첨부 된 파일이 없습니다.
@@ -115,16 +117,18 @@ case "3" :
 		</tr>
 		<% } %>
 	</table>
-	<table border="1" width="90%" align="center">
-		<tr>
+	<table class="table table-hover" width="90%" align="center">
+	<thead>
+		<tr align="center">
 			<th colspan="4">결재라인</th>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>이름</th>
 			<th>부서</th>
 			<th>직위</th>
 			<th>결재상태</th>
 		</tr>
+	</thead>
 		<%
 		String[] codes = evo.getLine().split("/");
 		String[] confirmeds = evo.getConfirmed().split("/");
@@ -148,7 +152,7 @@ case "3" :
 			}
 			
 			%>
-			<tr>
+			<tr  align="center">
 				<td><%= ivo.getName() %></td>
 				<td><%= ivo.getDeptkr() %></td>
 				<td><%= ivo.getPoskr() %></td>

@@ -10,13 +10,17 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-int idx = Integer.parseInt(request.getParameter("idx"));
-String status = request.getParameter("status");
+int idx = 0;
+if(request.getParameter("idx") != null && !request.getParameter("idx").equals("null")){
+	idx = Integer.parseInt(request.getParameter("idx")); // idx 
+}
+String status = "";
+if(request.getParameter("status") != null && !request.getParameter("status").equals("null")){
+	status = request.getParameter("status");
+}
 
 MailDAO dao = new MailDAO();
 MailVO vo = dao.selectView(idx);
-
-// System.out.println("View.jsp의 status : " + status);
 
 if(vo.getStatus() == 1){
 	dao.updateStatus(2, idx); // 안 읽은 메일(status : 1) -> 읽은 메일(status : 2)로 변경

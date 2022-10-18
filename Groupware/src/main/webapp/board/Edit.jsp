@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="board.*" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <% 	
 	request.setCharacterEncoding("utf-8");
 	response.setContentType("text/html;charset=utf-8");

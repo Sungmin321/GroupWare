@@ -6,7 +6,7 @@
 <%@page import="userinfo.UserInfoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ include file="../Login/IsLoggedIn.jsp" %>     --%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <%
 // UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoDAO dao = new UserInfoDAO();

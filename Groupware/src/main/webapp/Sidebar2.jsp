@@ -4,8 +4,29 @@
         <div class="sidebar">
             <div class="profile">
                 <img src="https://yt3.ggpht.com/ytc/AMLnZu-7OpiH7MOmo-4njrAr2L0OmJVF7j7dBJLvdcFHnQ=s900-c-k-c0x00ffffff-no-rj" alt="profile_picture">
+<%--                 <h3><%= session.getAttribute("user_name").toString() %></h3> --%>
+<%--                 <p><%= session.getAttribute("dept_name_kor").toString() %></p> --%>
+ <%
+ if(session.getAttribute("user_name") != null && !session.getAttribute("user_name").equals("null")){
+ %>
                 <h3><%= session.getAttribute("user_name").toString() %></h3>
+ <%
+ }else{
+ %>
+                <h3>정보 없음</h3>
+ <%
+ }
+ 
+ if(session.getAttribute("dept_name_kor") != null && !session.getAttribute("dept_name_kor").equals("null")){
+ %>
                 <p><%= session.getAttribute("dept_name_kor").toString() %></p>
+ <%
+ }else{
+ %>
+                <h3>정보 없음</h3>
+ <%
+ }
+ %>
             </div>
             <ul>
                 <li>

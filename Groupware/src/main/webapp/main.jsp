@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="board.*" %>
 <%@ page import="java.util.*" %>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <% BoardDAO dao = BoardDAO.getInstance();
 
 	List<BoardVO> boardLists = dao.selectListPage("1");

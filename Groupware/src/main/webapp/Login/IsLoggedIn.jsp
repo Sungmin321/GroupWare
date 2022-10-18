@@ -8,12 +8,13 @@
 </head>
 <body>
 <%
-if(session.getAttribute("user_id") == null){
+if(session.getAttribute("user_id") == null || session.getAttribute("user_id").equals("null")){
 %>
 
 <script>
 	alert("로그인 후 이용해주십시오.");
-	location.href='../index.jsp';
+// 	location.href='../index.jsp';
+	location.href='<%= request.getContextPath() %>/index.jsp';
 </script>
 	return;
 <%

@@ -8,17 +8,10 @@
 <%@page import="mail.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ include file="../Login/IsLoggedIn.jsp" %> --%>
-<%-- <jsp:include page="../Login/IsLoggedIn.jsp"/> --%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 
 <!-- 메인 화면에서 메뉴 클릭시 mailList 페이지로 이동하면서 request 영역을 통해 status 값을 받아온다 -->
 <!-- status 1 : 메일쓰기, 2 : 받은메일함, 3 : 보낸메일함, 4 : 임시보관함, 5 : 휴지통 -->
-
-<%-- <% --%>
-<!-- if(session.getAttribute("user_id") == null){ -->
-<!-- 	response.sendRedirect("../Login/IsLoggedIn.jsp"); -->
-<!-- } -->
-<!-- %> -->
 
 <% 
 request.setCharacterEncoding("utf-8");
@@ -27,8 +20,11 @@ Map<String, Object> map = new HashMap<String, Object>();
 
 // 세션 영역의 user_id로 user_code를 구해서 map.put();
 UserInfoDAO uDao = new UserInfoDAO();
-String user_id = session.getAttribute("user_id").toString();
-
+// String user_id = session.getAttribute("user_id").toString();
+String user_id = "";
+if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
+	user_id = session.getAttribute("user_id").toString();
+}
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
 

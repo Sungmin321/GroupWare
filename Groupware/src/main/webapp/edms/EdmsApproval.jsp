@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="edms.*"%>
 <%@ page import="java.util.*"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,6 +173,24 @@
 			})
 		})
 	}
+	
+function validateForm(form){
+	if(form.cate.value == "0"){
+		alert("문서유형을 선택해주세요.");
+		return false;
+	}
+	if(!form.title.value || form.title.value == ""){
+		alert("제목을 입력해주세요.");
+		return false;
+	}
+	var rows = document.getElementById("edmsLine").getElementsByTagName("tr");
+	if(rows.length == 0){
+		alert("결재자를 한 명 이상 추가해주세요.");
+		return false;
+	}
+};
+	
+	
 </script>
 	
 

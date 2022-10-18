@@ -5,11 +5,14 @@
 <% 
 request.setCharacterEncoding("utf-8");
 
-int status = Integer.parseInt(request.getParameter("status"));
-
-String[] arr = request.getParameter("chk_value").split(","); // idx 
-
-
+int status = 0;
+if(request.getParameter("status") != null && !request.getParameter("status").equals("null")){
+	status = Integer.parseInt(request.getParameter("status"));
+}
+String[] arr = null;
+if(request.getParameter("chk_value") != null && !request.getParameter("chk_value").equals("null")){
+	arr = request.getParameter("chk_value").split(","); // idx 
+}
 int[] chk_value = new int[arr.length];
 for(int i=0; i<arr.length; i++){
 	chk_value[i] = Integer.parseInt(arr[i]);
