@@ -176,16 +176,35 @@
 	
 function validateForm(form){
 	if(form.cate.value == "0"){
-		alert("문서유형을 선택해주세요.");
+		alert("문서유형을 선택하세요.");
 		return false;
 	}
+	
 	if(!form.title.value || form.title.value == ""){
-		alert("제목을 입력해주세요.");
+		alert("제목을 입력하세요.");
 		return false;
 	}
+	
+	var arrLength = $("input[name=content]").length;
+	if(arrLength == 0){
+		alert("문서유형을 선택하세요.");
+		return false;
+	}else{
+		var arr = new Array(arrLength);
+		for(var i=0; i<arrLength; i++){
+			arr[i] = $("input[name=content]").eq(i).val();
+			var p = $("input[name=content]").eq(i).attr("placeholder");
+			
+			if(p != null && p != "비고" && arr[i] == ""){ // 비고가 아닌 모든 칸에 값이 입력되게 함
+				alert(p + "을(를) 입력하세요.");
+				return false;
+			}
+		}
+	}
+	
 	var rows = document.getElementById("edmsLine").getElementsByTagName("tr");
 	if(rows.length == 0){
-		alert("결재자를 한 명 이상 추가해주세요.");
+		alert("결재자를 한 명 이상 추가하세요.");
 		return false;
 	}
 };
