@@ -1,3 +1,5 @@
+<%@page import="userinfo.UserInfoVO"%>
+<%@page import="userinfo.UserInfoDAO"%>
 <%@ include file="../Sidebar1.jsp" %>
 <%@page import="board.BoardVO"%>
 <%@page import="java.util.List"%>
@@ -6,6 +8,7 @@
 <%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %> 
 <%
 request.setCharacterEncoding("utf-8");
 
@@ -122,11 +125,24 @@ if(boardLists.isEmpty()){
 	</table>
 	
 	<table class="table table-hover" width="90%">
+	<thead>
 		<tr align="right">
 			<td style="border-bottom:none;">
+<%
+if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
+	UserInfoDAO uDao = new UserInfoDAO();
+	UserInfoVO uVo = uDao.getUserInfoVO(session.getAttribute("user_id").toString());
+
+	if(uVo.getDept_id() == 1){
+%>
 				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileWrite.jsp';">글쓰기</button>
+<%
+	}	
+}
+%>
 			</td>
 		</tr>
+	</thead>
 	</table>
 </body>
 </html>

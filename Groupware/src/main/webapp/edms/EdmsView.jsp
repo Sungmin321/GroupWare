@@ -110,8 +110,8 @@ case "3" :
 		</tr>
 		<% }else { %>
 		<tr align="center">
-			<th style="border-bottom:none;">첨부파일</th>
-			<td style="border-bottom:none;">
+			<th>첨부파일</th>
+			<td>
 			첨부 된 파일이 없습니다.
 			</td>
 		</tr>

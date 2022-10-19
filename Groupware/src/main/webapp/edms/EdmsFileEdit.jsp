@@ -7,6 +7,7 @@
 <%@ include file="../Sidebar1.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %> 
 <%
 request.setCharacterEncoding("utf-8");
 
@@ -38,6 +39,7 @@ fDao.close();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>전자결재 - 게시글 수정</title>
 </head>
@@ -86,20 +88,18 @@ function delete_btn_click(){
 	<form name="writeFrm" enctype="multipart/form-data" method="post" onsubmit="return validateForm(this);" action="EdmsFileEditProcess.jsp">
 	
 	<input type="hidden" name="idx" value="<%= idx %>"/>
-<%-- 	<input type="hidden" name="user_code" value="<%= user_code %>"/> --%>
-<!-- 	<input type="hidden" name="cate" value="3"/> -->
 	
-	<table border="1" width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
 			<td width="15%">작성자</td>
 			<td>
-				<input type="text" name="user_name" value="<%= user_name %>" style="width:90%;" readonly/>
+				<input type="text" class="form-control" name="user_name" value="<%= user_name %>" style="width:90%;" readonly/>
 			</td>
 		</tr>
 		<tr>
 			<td width="15%">제목</td>
 			<td>
-				<input type="text" name="title" value="<%= vo.getTitle() %>" style="width: 90%;"/>
+				<input type="text" class="form-control" name="title" value="<%= vo.getTitle() %>" style="width: 90%;"/>
 			</td>
 		</tr>
 		<tr>
@@ -108,31 +108,44 @@ function delete_btn_click(){
 <%
 if(fVo.getOfile() != null){
 %>
-				<input type="button" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
-				<input type="button" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
-				<input type="text" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
+			<div class="form-group" style="float:left; margin-right:10px; width=50%;">
+				<input type="text" class="form-control" id="fileName" name="fileName" value="<%= fVo.getOfile() %>" readonly/>
+			</div>
+			<div class="form-group" style="float:left; margin-right:10px; width=20%;">
+				<input type="button" class="btn btn-dark" id="upload_btn" name="upload_btn" value="다시 업로드" onclick="btn_click();"/>
+			</div>
+			<div class="form-group" style="float:left; width=10%;">
+				<input type="button" class="btn btn-dark" id="delete_btn" name="delete_btn" value="삭제" onclick="delete_btn_click();"/>
+			</div>
+			<div class="form-group" style="float:left; width=20%;">
+			</div>
+
 
 <%
 }
 %>
-				<input type="file" id="attachedFile" name="attachedFile" style="width: 90%;"/>
-				<Button type="button" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			<div class="form-group" style="float:left; margin-right:10px;">
+				<input type="file" class="form-control" id="attachedFile" name="attachedFile" style="width: 100%;"/>
+			</div>
+			<div class="form-group" style="float:left;">
+				<Button type="button" class="btn btn-dark" id="deleteFileBtn" name="deleteFileBtn" onclick="deleteFile();">업로드 취소</Button>
+			</div>				
 			</td>
 		</tr>
 		<tr>
 			<td width="15%">내용</td>
 			<td>
-				<textarea name="content" style="width: 100%; height: 300px;"><%= vo.getContent() %></textarea>
+				<textarea class="form-control" name="content" style="width: 100%; height: 300px;"><%= vo.getContent() %></textarea>
 			</td>
 		</tr>
 	</table>
 	
-	<table width="90%">
+	<table class="table table-hover" width="90%">
 		<tr>
 			<td align="center">
-				<input type="submit" name="submitValue" value="작성완료"/>
-				<button type="reset">다시 입력</button>
-				<button type="button" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
+				<input type="submit" class="btn btn-primary" name="submitValue" value="작성완료"/>
+				<button type="reset" class="btn btn-primary">다시 입력</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='EdmsFileList.jsp';">목록 보기</button>
 			</td>
 		</tr>
 	</table>
