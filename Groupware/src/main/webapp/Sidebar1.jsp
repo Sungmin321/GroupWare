@@ -150,7 +150,7 @@ body.active .wrapper .section{
 }
 </style>
 </head>
-<body>
+<body style="background-color:#EEEEEE;">
 	   
     <div class="wrapper">
        <div class="section">

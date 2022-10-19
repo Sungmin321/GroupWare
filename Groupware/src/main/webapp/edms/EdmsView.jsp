@@ -101,8 +101,8 @@ case "3" :
 		%>
 		<% if(fVo.getOfile() != null) { %>
 		<tr align="center">
-			<th style="border-bottom:none;">첨부파일</th>
-			<td style="border-bottom:none;">
+			<th>첨부파일</th>
+			<td>
 			<a href="../attachedfile/Download.jsp?oName=
 			<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %>
 			</a>
@@ -110,8 +110,8 @@ case "3" :
 		</tr>
 		<% }else { %>
 		<tr align="center">
-			<th>첨부파일</th>
-			<td>
+			<th style="border-bottom:none;">첨부파일</th>
+			<td style="border-bottom:none;">
 			첨부 된 파일이 없습니다.
 			</td>
 		</tr>

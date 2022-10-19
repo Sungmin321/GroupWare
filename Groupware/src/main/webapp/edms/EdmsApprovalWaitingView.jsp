@@ -5,6 +5,7 @@
 <%@ page import="edms.*" %>
 <%@ page import="attachedfile.*" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ include file="../Login/IsLoggedIn.jsp" %>  
 <%! EdmsDAO edmsdao = EdmsDAO.getInstance(); %>
 <% 
 	String idx = request.getParameter("idx"); // 게시물 찾아올때 쓸 idx 
@@ -53,40 +54,41 @@ case "3" :
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1" width="90%" align="center">
-		<tr>
+	<table class="table table-hover" width="90%" align="center">
+		<tr align="center">
 			<th width="30%">문서번호</th>
-			<td><%= number %></td>
-		</tr>
-		<tr>
+			<td align="left"><%= number %></td>
+		</tr align="center">
+		<tr align="center">
 			<th>제목</th>
-			<td><%= evo.getTitle() %></td>
-		</tr>
-		<tr>
+			<td align="left"><%= evo.getTitle() %></td>
+		</tr align="center">
+		<tr align="center">
 			<th>기안자</th>
-			<td><%= edmsdao.getName(evo.getUser_code()) %></td>
+			<td align="left"><%= edmsdao.getName(evo.getUser_code()) %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>문서양식</th>
-			<td><%= doctypekr %></td>
+			<td align="left"><%= doctypekr %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>기안일</th>
-			<td><%= evo.getPostdate() %></td>
+			<td align="left"><%= evo.getPostdate() %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>결재상태</th>
-			<td><%= statuskr %></td>
+			<td align="left"><%= statuskr %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>기안완료일</th>
-			<td><%= evo.getLastdate()==null?"미완료":evo.getLastdate() %></td>
+			<td align="left"><%= evo.getLastdate()==null?"미완료":evo.getLastdate() %></td>
 		</tr>
-		<tr>
+		<tr align="center">
 		<th colspan="2">결재 내용</th>
 		</tr>
 		<% String Contents[] = evo.getContent().split("`"); 
@@ -100,25 +102,25 @@ case "3" :
 		%>
 		<% if(fVo.getOfile() != null) {
 		%>
-		<tr>
+		<tr align="center">
 			<th>첨부파일</th>
-			<td><a href="../attachedfile/Download.jsp?oName=
+			<td align="left"><a href="../attachedfile/Download.jsp?oName=
 			<%= URLEncoder.encode(fVo.getOfile(), "UTF-8")%>&sName=<%= URLEncoder.encode(fVo.getSfile(), "UTF-8")%>"><%= fVo.getOfile() %>
 			</a></td>
 		</tr>
 		<% } else {
 		%>
-		<tr>
+		<tr align="center">
 			<th>첨부파일</th>
-			<td>첨부 된 파일이 없습니다.</td>
+			<td align="left">첨부 된 파일이 없습니다.</td>
 		</tr>
 		<% } %>
 	</table>
-	<table border="1" width="90%" align="center">
-		<tr>
+	<table class="table table-hover" width="90%" align="center">
+		<tr align="center">
 			<th colspan="4">결재라인</th>
 		</tr>
-		<tr>
+		<tr align="center">
 			<th>이름</th>
 			<th>부서</th>
 			<th>직위</th>
@@ -148,32 +150,34 @@ case "3" :
 			
 			%>
 			<tr>
-				<td><%= ivo.getName() %></td>
-				<td><%= ivo.getDeptkr() %></td>
-				<td><%= ivo.getPoskr() %></td>
-				<td><%= confirmed %></td>
+				<td align="center"><%= ivo.getName() %></td>
+				<td align="center"><%= ivo.getDeptkr() %></td>
+				<td align="center"><%= ivo.getPoskr() %></td>
+				<td align="center"><%= confirmed %></td>
 			</tr>
 			<%
 		}
 		%>
 	</table>
-	<table align="center">
-		<tr>
-			<td width="40%">
+	<table class="table table-hover" align="center">
+	<thead>
+		<tr align="center">
+			<th width="40%" style="border-bottom:none;">
 				<form action="EdmsApprovalProcess.jsp" method="post">
-					<input type="submit" style="width:100%;height:100%;" value="승인">
+					<input type="submit" class="btn btn-primary" style="width:100%;height:100%;" value="승인">
 					<input type="hidden" name="idx" value="<%= idx %>">
 					<input type="hidden" name="i" value="<%= number %>">
 				</form>
-			</td>
-			<td width="40%">
+			</th>
+			<th width="40%" style="border-bottom:none;">
 				<form action="EdmsReferProcess.jsp" method="post">
-					<input type="submit" style="width:100%;height:100%;" value="반려">
+					<input type="submit" class="btn btn-primary" style="width:100%;height:100%;" value="반려">
 					<input type="hidden" name="idx" value="<%= idx %>">
 					<input type="hidden" name="i" value="<%= number %>">
 				</form>
-			</td>
+			</th>
 		</tr>
+	</thead>
 	</table>
 </body>
 </html>
