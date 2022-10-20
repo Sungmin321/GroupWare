@@ -4,6 +4,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="attachedfile.AttachedFileDAO"%>
 <%@page import="attachedfile.AttachedFileVO"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%! EdmsDAO edmsdao = EdmsDAO.getInstance(); %>
@@ -109,9 +110,10 @@
 					fVo.setOfile(ofile);
 					fVo.setSfile(sfile);
 
-					AttachedFileDAO fDao = new AttachedFileDAO();
+// 					AttachedFileDAO fDao = new AttachedFileDAO();
+					AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 					uploadFileResult = fDao.inputFile(fVo);
-					fDao.close();
+// 					fDao.close();
 				}catch(Exception e){
 					e.printStackTrace();
 				}

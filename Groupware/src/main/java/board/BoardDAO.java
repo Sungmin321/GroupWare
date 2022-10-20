@@ -18,9 +18,9 @@ public class BoardDAO extends DBConnPool {
 		return instance;
 	}
 
-	public BoardDAO(String edmsFile) {
-		super();
-	}
+//	public BoardDAO(String edmsFile) {
+//		super();
+//	}
 
 	public int insertWrite(BoardVO vo) {
 		int result = 0;

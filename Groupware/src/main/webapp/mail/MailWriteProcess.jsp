@@ -6,11 +6,12 @@
 <%@page import="mail.MailVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메일 쓰기 처리</title>
 <%
 // 첨부파일 처리할 idx를 저장할 변수
 int idx1 = 0; // status = 1일떄 idx
@@ -33,7 +34,6 @@ String submitValue = mr.getParameter("submitValue"); // 보내기 or 임시저�
 String title = mr.getParameter("title");
 String content = mr.getParameter("content");
 String sender = mr.getParameter("sender");
-// String recipients = mr.getParameter("recipients");
 String recipients = "";
 if(mr.getParameter("statusValue").equals("1")){
 	recipients = mr.getParameter("recipients1");
@@ -44,17 +44,11 @@ String idxValue = mr.getParameter("idxValue");
 
 int idx = 0;
 if(idxValue != null && !idxValue.equals("") && !idxValue.equals("null")){
-// 	System.out.println("idxValue != null");
-// 	System.out.println(mr.getParameter("idxValue"));
-	System.out.println("idxValue : " + idxValue);
-	
 	idx = Integer.parseInt(mr.getParameter("idxValue"));
 }
 String fileName = mr.getParameter("fileName");
-// System.out.println("fileName : " + fileName);
 
 int status = Integer.parseInt(mr.getParameter("statusValue"));
-// System.out.println("Process page status : " + status);
 
 MailVO vo = new MailVO();
 
@@ -66,7 +60,8 @@ vo.setStatus(status);
 vo.setSender(sender);
 vo.setRecipients(recipients);
 
-MailDAO dao = new MailDAO();
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 
 int result = 0;
 
@@ -75,12 +70,10 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setStatus(3);
 	result = dao.inputMail(vo);
 	idx3 = dao.getLastIdx();
-// 	System.out.println("idx3 : " + idx3);
 	if(result == 1){
 		vo.setStatus(1);
 		result = dao.inputMail(vo);
 		idx1 = dao.getLastIdx();
-// 		System.out.println("idx1 : " + idx1);
 	}
 	
 }else if(submitValue.equals("보내기") && status == 1 && (content == null || content.equals(""))){
@@ -88,12 +81,10 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setStatus(3);
 	result = dao.inputMailContentNull(vo);
 	idx3 = dao.getLastIdx();
-// 	System.out.println("idx3 : " + idx3);
 	if(result == 1){
 		vo.setStatus(1);
 		result = dao.inputMailContentNull(vo);
 		idx1 = dao.getLastIdx();
-// 		System.out.println("idx1 : " + idx1);
 	}
 	
 }else if(submitValue.equals("보내기") && status == 4 && (content != null && !content.equals(""))){
@@ -102,12 +93,10 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setStatus(3);
 	result = dao.update(vo);
 	idx3 = idx;
-// 	System.out.println("idx3 : " + idx3);
 	if(result == 1){
 		vo.setStatus(1);
 		result = dao.inputMail(vo);
 		idx1 = dao.getLastIdx();
-// 		System.out.println("idx1 : " + idx1);
 	}
 
 }else if(submitValue.equals("보내기") && status == 4 && (content == null || content.equals(""))){
@@ -116,12 +105,10 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setStatus(3);
 	result = dao.updateContentNull(vo);
 	idx3 = idx;
-// 	System.out.println("idx3 : " + idx3);
 	if(result == 1){
 		vo.setStatus(1);
 		result = dao.inputMailContentNull(vo);
 		idx1 = dao.getLastIdx();
-// 		System.out.println("idx1 : " + idx1);
 	}
 	
 }else if(submitValue.equals("임시저장") && status == 1 && (content != null && !content.equals(""))){
@@ -129,14 +116,12 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setStatus(4);
 	result = dao.inputMail(vo);
 	idx4 = dao.getLastIdx();
-// 	System.out.println("idx4 : " + idx4);
 
 }else if(submitValue.equals("임시저장") && status == 1 && (content == null || content.equals(""))){
 	System.out.println("다섯번째 else if문");
 	vo.setStatus(4);
 	result = dao.inputMailContentNull(vo);
 	idx4 = dao.getLastIdx();
-// 	System.out.println("idx4 : " + idx4);
 	
 }else if(submitValue.equals("임시저장") && status == 4 && (content != null && !content.equals(""))){
 	System.out.println("여섯번째 else if문");
@@ -144,7 +129,6 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setIdx(idx);
 	result = dao.update(vo);
 	idx4 = dao.getLastIdx();
-// 	System.out.println("idx4 : " + idx4);
 	
 }else if(submitValue.equals("임시저장") && status == 4 && (content == null || content.equals(""))){
 	System.out.println("일곱번째 else if문");
@@ -152,10 +136,9 @@ if(submitValue.equals("보내기") && status == 1 && (content != null && !conten
 	vo.setIdx(idx);
 	result = dao.updateContentNull(vo);
 	idx4 = dao.getLastIdx();
-// 	System.out.println("idx4 : " + idx4);
 }
 
-dao.close();
+// dao.close();
 
 if(result == 1){
 
@@ -174,11 +157,8 @@ if(result == 1){
 int uploadFileResult = 0;
 
 AttachedFileVO fVo = new AttachedFileVO();
-AttachedFileDAO fDao = new AttachedFileDAO();
-
-// int newIdx = 0;
-// newIdx = dao.getLastIdx(); // 위에서 시퀀스로 생성된 idx 값 가져오기
-// dao.close();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 
 int fileIdx = 0; // idx1 또는 idx3 또는 idx4의 값을 대입
 
@@ -281,9 +261,7 @@ if(ofile != null){
 	}
 }
 
-fDao.close();
-
-
+// fDao.close();
 
 if(submitValue.equals("보내기")){
 	status = 2; // 보낸메일함으로 가기 위해 status 2로 변경
@@ -294,9 +272,6 @@ request.setAttribute("idx", idxValue);
 request.setAttribute("idx4", idx4);
 request.setAttribute("status", status);
 request.setAttribute("submitValue", submitValue);
-
-// System.out.println("Process Page Changed status : " + status);
-
 
 if (ofile == null) { // 첨부파일이 없는 경우
 	request.getRequestDispatcher("MailWriteSuccess.jsp").forward(request, response);

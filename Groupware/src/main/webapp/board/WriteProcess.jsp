@@ -67,9 +67,10 @@ if (iResult == 1) {
 			fVo.setOfile(ofile);
 			fVo.setSfile(sfile);
 
-			AttachedFileDAO fDao = new AttachedFileDAO();
+// 			AttachedFileDAO fDao = new AttachedFileDAO();
+			AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 			uploadFileResult = fDao.inputFile(fVo);
-			fDao.close();
+// 			fDao.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -51,7 +51,8 @@ int fileResult = 0;
 int fileIdx = Integer.parseInt(idx);
 
 AttachedFileVO fVo = new AttachedFileVO();
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 
 if(fDao.selectView(fileIdx).getOfile() != null){ // 기존 첨부파일이 있을때
 	if((fileName == null || fileName.equals("") || fileName.equals("null"))){ // 유 -> 무 (삭제 - delete) V
@@ -103,7 +104,7 @@ if(fDao.selectView(fileIdx).getOfile() != null){ // 기존 첨부파일이 있�
 }
 
 // bDao.close();
-fDao.close();
+// fDao.close();
 
 if (ofile == null) { // 첨부파일이 없는 경우
 %>

@@ -9,8 +9,8 @@
 <%@ include file="../Login/IsLoggedIn.jsp" %>
 <%@ include file="CheckDept.jsp" %>
 <%
-// UserInfoDAO dao = UserInfoDAO.getInstance();
-UserInfoDAO dao = new UserInfoDAO();
+// UserInfoDAO dao = new UserInfoDAO();
+UserInfoDAO dao = UserInfoDAO.getInstance();
 Map<String, Object> map = new HashMap<String, Object>();
 
 String searchField = request.getParameter("searchField");

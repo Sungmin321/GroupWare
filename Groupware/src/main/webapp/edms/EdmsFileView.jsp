@@ -15,7 +15,8 @@ request.setCharacterEncoding("utf-8");
 // 수정하기, 삭제하기 버튼 접근 권한 확인
 String user_id = session.getAttribute("user_id").toString();
 
-UserInfoDAO iDao = new UserInfoDAO();
+// UserInfoDAO iDao = new UserInfoDAO();
+UserInfoDAO iDao = UserInfoDAO.getInstance();
 UserInfoVO iVo = iDao.getUserInfoVO(user_id);
 String user_code = String.valueOf(iVo.getUser_code());
 
@@ -30,10 +31,11 @@ BoardVO vo = dao.selectView(idx);
 // dao.close();
 
 // 상세페이지 첨부파일
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 AttachedFileVO fVo = fDao.selectView(idx);
 // System.out.println("fVo.getOfile() : " + fVo.getOfile());
-fDao.close();
+// fDao.close();
 %>
 <!DOCTYPE html>
 <html>

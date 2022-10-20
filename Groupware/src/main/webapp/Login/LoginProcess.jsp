@@ -6,10 +6,10 @@
 String user_id = request.getParameter("user_id");
 String user_pw = request.getParameter("user_pw");
 
-// UserInfoDAO dao = UserInfoDAO.getInstance();
-UserInfoDAO dao = new UserInfoDAO();
+// UserInfoDAO dao = new UserInfoDAO();
+UserInfoDAO dao = UserInfoDAO.getInstance();
 UserInfoKorVO vo = dao.getUserInfoVO(user_id, user_pw);
-dao.close();
+// dao.close();
 
 if(vo.getUser_id() != null){
 	session.setAttribute("user_id", vo.getUser_id());
@@ -28,7 +28,7 @@ if(vo.getUser_id() != null){
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 처리</title>
 </head>
 <body>
 

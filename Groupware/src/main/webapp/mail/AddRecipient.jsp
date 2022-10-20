@@ -8,8 +8,8 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-// UserInfoDAO dao = UserInfoDAO.getInstance();
-UserInfoDAO dao = new UserInfoDAO();
+// UserInfoDAO dao = new UserInfoDAO();
+UserInfoDAO dao = UserInfoDAO.getInstance();
 Map<String, Object> map = new HashMap<String, Object>();
 
 String searchField = request.getParameter("searchField");

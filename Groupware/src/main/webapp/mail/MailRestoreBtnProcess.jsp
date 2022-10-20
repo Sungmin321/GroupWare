@@ -1,6 +1,7 @@
 <%@page import="mail.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <% 
 request.setCharacterEncoding("utf-8");
 
@@ -19,8 +20,8 @@ for(int i=0; i<arr.length; i++){
 	chk_value[i] = Integer.parseInt(arr[i]);
 }
 
-MailDAO dao = new MailDAO();
-
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 
 for(int i=0; i<statusArr.length; i++){
 	statusArr[i] = dao.getStatus(chk_value[i]);
@@ -34,7 +35,7 @@ for(int i=0; i<chk_value.length; i++){
 		break;
 	}
 }
-dao.close();
+// dao.close();
 
 if(result == 1){
 %>

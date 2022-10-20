@@ -4,8 +4,10 @@
 <%@page import="deptPosRes.DeptPosResDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <%
-DeptPosResDAO dao = new DeptPosResDAO();
+// DeptPosResDAO dao = new DeptPosResDAO();
+DeptPosResDAO dao = DeptPosResDAO.getInstance();
 List<DeptPosResVO> list = new ArrayList<DeptPosResVO>();
 %>
 <!DOCTYPE html>

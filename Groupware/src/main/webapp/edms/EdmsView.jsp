@@ -11,7 +11,8 @@
 		request.setCharacterEncoding("utf-8");
 		String idx = request.getParameter("idx"); // 게시물 찾아올때 쓸 idx 
 		String number = request.getParameter("i"); // 글번호
-		AttachedFileDAO dao = new AttachedFileDAO();
+// 		AttachedFileDAO dao = new AttachedFileDAO();
+		AttachedFileDAO dao = AttachedFileDAO.getInstance();
 		AttachedFileVO fVo = dao.selectView(Integer.parseInt(idx));
 	
 	EdmsVO evo = edmsdao.viewEdms(idx); //idx로 정보 찾아오고

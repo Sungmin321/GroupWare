@@ -14,9 +14,10 @@ BoardDAO bDao = BoardDAO.getInstance();
 int result = bDao.deletePost(idx);
 // bDao.close();
 
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 fDao.delete(Integer.parseInt(idx));
-fDao.close();
+// fDao.close();
 
 if(result == 1){
 %>

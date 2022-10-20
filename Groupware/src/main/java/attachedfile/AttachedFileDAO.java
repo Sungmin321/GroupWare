@@ -1,10 +1,21 @@
 package attachedfile;
+import java.sql.SQLException;
 
 import dbcon.DBConnPool;
 
 public class AttachedFileDAO extends DBConnPool {
-	public AttachedFileDAO() {
-		super();
+//	public AttachedFileDAO() {
+//		super();
+//	}
+	
+	private static AttachedFileDAO instance = new AttachedFileDAO();
+
+	private AttachedFileDAO() {
+
+	}
+
+	public static AttachedFileDAO getInstance() {
+		return instance;
 	}
 	
 	public AttachedFileVO selectView(int idx) {
@@ -28,6 +39,22 @@ public class AttachedFileDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 		return vo;
@@ -51,6 +78,22 @@ public class AttachedFileDAO extends DBConnPool {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 		return result;
@@ -72,6 +115,22 @@ public class AttachedFileDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 		return result;
@@ -95,6 +154,22 @@ public class AttachedFileDAO extends DBConnPool {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return result;
 	}
@@ -113,6 +188,22 @@ public class AttachedFileDAO extends DBConnPool {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return result; 
 	}

@@ -18,23 +18,26 @@ String user_id = "";
 if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
 	user_id = session.getAttribute("user_id").toString();
 }
-UserInfoDAO uDao = new UserInfoDAO();
+// UserInfoDAO uDao = new UserInfoDAO();
+UserInfoDAO uDao = UserInfoDAO.getInstance();
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
-uDao.close();
+// uDao.close();
 
 // status == 4
 int idx = 0;
 if(status == 4){
 	idx = Integer.parseInt(request.getParameter("idx"));
 }
-MailDAO dao = new MailDAO();	
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 MailVO vo = dao.selectView(idx);
 
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 AttachedFileVO fVo = fDao.selectView(idx);
 
-fDao.close();
+// fDao.close();
 %>
 <!DOCTYPE html>
 <html>
@@ -93,15 +96,25 @@ function btn_click(){
 
 <script>
 function validateForm(form){
-	if(!form.sender.value){
+	if(!form.sender.value){ // 문제 있음
 		alert("보내는사람을 입력하세요.");
 		return false;
 	}
-	if(!form.recipients.value){
-		alert("받는사람을 한명 이상 입력하세요.");
-		return false;
+
+	var v = form.statusValue.value;
+
+	if(v == 1){
+		if(!form.recipients1.value){ // 문제 있음
+			alert("받는사람을 한명 이상 입력하세요.");
+			return false;
+		}
+	}else if(v == 4){
+		if(!form.recipients4.value){ // 문제 있음
+			alert("받는사람을 한명 이상 입력하세요.");
+			return false;
+		}
 	}
-	if(!form.title.value){
+	if(!form.title.value){ // 문제 없음
 		var result = confirm("제목이 없습니다. 제목 없이 메일을 발송하시겠습니까?");
 		if(result){
 			form.title.value = "제목없음";
@@ -146,15 +159,11 @@ function search_btn(){
 	
 <%
 if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성하는 경우
-// 	String user_id = session.getAttribute("user_id").toString();
-// 	UserInfoDAO uDao = new UserInfoDAO();
-// 	UserInfoVO uVo = uDao.getUserInfoVO(user_id);
-// 	int user_code = uVo.getUser_code();
 %>
 	<table class="table table-hover" width="90%">
 		<tr>
-			<td onmouseover="this.style.background='white'" width="15%" style="vertical-align:middle;">보내는사람</td>
-			<td onmouseover="this.style.background='white'">
+			<td width="15%" style="vertical-align:middle;">보내는사람</td>
+			<td>
 				<input type="text" class="form-control" name="sender" value="<%= user_code %>" style="width: 30%;" readonly/>
 			</td>
 		</tr>
@@ -192,20 +201,9 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 			</td>
 		</tr>
 	</table>
+	
 <%
 }else if(status == 4){ // 임시보관함에서 메일보기로 넘어온 경우
-// 	int idx = Integer.parseInt(request.getParameter("idx"));
-// 	MailDAO dao = new MailDAO();	
-// 	MailVO vo = dao.selectView(idx);
-// 	dao.close();
-	
-// 	AttachedFileDAO fDao = new AttachedFileDAO();
-// 	AttachedFileVO fVo = fDao.selectView(idx);
-
-// 	System.out.println("write 페이지 137행 idx : " + idx);
-// 	System.out.println("fVo.getOfile() : " + fVo.getOfile());
-
-// 	fDao.close();
 %>
 	<table class="table table-hover" width="90%">
 		<tr>
@@ -279,7 +277,6 @@ if(status == 1){ // 메일쓰기 버튼을 클릭하여 처음 메일을 작성�
 }
 %>	
 	</form>
-
 </body>
 </html>
 <%@ include file="../Sidebar2.jsp" %>

@@ -19,7 +19,8 @@ if(request.getParameter("status") != null && !request.getParameter("status").equ
 	status = request.getParameter("status");
 }
 
-MailDAO dao = new MailDAO();
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 MailVO vo = dao.selectView(idx);
 
 if(vo.getStatus() == 1){
@@ -28,15 +29,16 @@ if(vo.getStatus() == 1){
 	dao.updateStatus(25, idx); // 휴지통 안 읽은 메일(status : 15) -> 휴지통 읽은 메일(status : 25)로 변경
 }
 
-dao.close();
+// dao.close();
 
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 AttachedFileVO fVo = fDao.selectView(idx);
 
 System.out.println("idx : " + idx);
 System.out.println("fVo.getOfile() : " + fVo.getOfile());
 
-fDao.close();
+// fDao.close();
 %>
 <!DOCTYPE html>
 <html>

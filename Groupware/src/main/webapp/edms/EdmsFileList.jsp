@@ -130,7 +130,8 @@ if(boardLists.isEmpty()){
 			<td style="border-bottom:none;">
 <%
 if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
-	UserInfoDAO uDao = new UserInfoDAO();
+// 	UserInfoDAO uDao = new UserInfoDAO();
+	UserInfoDAO uDao = UserInfoDAO.getInstance();
 	UserInfoVO uVo = uDao.getUserInfoVO(session.getAttribute("user_id").toString());
 
 	if(uVo.getDept_id() == 1){

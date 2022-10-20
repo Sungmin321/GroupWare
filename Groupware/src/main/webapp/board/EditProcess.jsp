@@ -68,7 +68,8 @@ if (iResult == 1) {
 			fVo.setSfile(sfile);
 			
 			//파일이 있는거면 업데이트를 하고 없는거면 새로 인서트를 넣어야된다.
-			AttachedFileDAO fDao = new AttachedFileDAO();
+// 			AttachedFileDAO fDao = new AttachedFileDAO();
+			AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 			
 			boolean flag = fDao.findFile(Integer.parseInt(idx));
 			// 파일이 있으면 true가 반환되고, 없으면 false가 반환된다.
@@ -77,15 +78,16 @@ if (iResult == 1) {
 			}else{
 				uploadFileResult = fDao.inputFile(fVo);
 			}
-			fDao.close();
+// 			fDao.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	 	//	request.getRequestDispatcher("EdmsList.jsp").forward(request, response);
 	}else{
-		AttachedFileDAO fDao = new AttachedFileDAO();
+// 		AttachedFileDAO fDao = new AttachedFileDAO();
+		AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 		fDao.delete(Integer.parseInt(idx));
-		fDao.close();
+// 		fDao.close();
 	}
 	
 	if (ofile != null && uploadFileResult == 1){ // 첨부파일이 있고 업로드 성공한 경우

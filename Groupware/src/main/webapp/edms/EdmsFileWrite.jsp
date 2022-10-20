@@ -8,11 +8,12 @@
 request.setCharacterEncoding("utf-8");
 
 String user_id = session.getAttribute("user_id").toString();
-UserInfoDAO uDao = new UserInfoDAO();
+// UserInfoDAO uDao = new UserInfoDAO();
+UserInfoDAO uDao = UserInfoDAO.getInstance();
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
 String user_name = uVo.getUser_name();
-uDao.close();
+// uDao.close();
 %>
 <!DOCTYPE html>
 <html>

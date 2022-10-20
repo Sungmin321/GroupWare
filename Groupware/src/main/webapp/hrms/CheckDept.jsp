@@ -2,6 +2,7 @@
 <%@page import="userinfo.UserInfoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 <body>
 <%
 if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
-	UserInfoDAO dao = new UserInfoDAO();
+// 	UserInfoDAO dao = new UserInfoDAO();
+	UserInfoDAO dao = UserInfoDAO.getInstance();
 	UserInfoVO vo = dao.getUserInfoVO(session.getAttribute("user_id").toString());
 	int dept_id = vo.getDept_id();
 	

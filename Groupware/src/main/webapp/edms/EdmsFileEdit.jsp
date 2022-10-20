@@ -22,19 +22,21 @@ BoardVO vo = dao.selectView(idx);
 
 // id, 사원코드 정보 가져오기
 String user_id = session.getAttribute("user_id").toString();
-UserInfoDAO uDao = new UserInfoDAO();
+// UserInfoDAO uDao = new UserInfoDAO();
+UserInfoDAO uDao = UserInfoDAO.getInstance();
 UserInfoVO uVo = uDao.getUserInfoVO(user_id);
 int user_code = uVo.getUser_code();
 String user_name = uVo.getUser_name();
-uDao.close();
+// uDao.close();
 
 //첨부파일 가져오기
-AttachedFileDAO fDao = new AttachedFileDAO();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 AttachedFileVO fVo = fDao.selectView(idx);
 
 System.out.println("fVo.getOfile() : " + fVo.getOfile());
 
-fDao.close();
+// fDao.close();
 %>
 <!DOCTYPE html>
 <html>

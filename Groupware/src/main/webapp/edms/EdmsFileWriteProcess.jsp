@@ -58,7 +58,8 @@ if(ofile != null){ // 첨부파일이 있을때
 	idx = bDao.getLastIdx();
 	
 	AttachedFileVO fVo = new AttachedFileVO();
-	AttachedFileDAO fDao = new AttachedFileDAO();
+// 	AttachedFileDAO fDao = new AttachedFileDAO();
+	AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 	
 	try {
 		String ext = ofile.substring(ofile.lastIndexOf("."));
@@ -73,7 +74,7 @@ if(ofile != null){ // 첨부파일이 있을때
 		fVo.setSfile(sfile);
 		
 		fileResult = fDao.inputFile(fVo);
-		fDao.close();
+// 		fDao.close();
 		
 	} catch (Exception e) {
 		e.printStackTrace();

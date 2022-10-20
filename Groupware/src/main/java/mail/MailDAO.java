@@ -1,17 +1,26 @@
 package mail;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import dbcon.DBConnPool;
 
 public class MailDAO extends DBConnPool{
-	public MailDAO() {
-		super();
+//	public MailDAO() {
+//		super();
+//	}
+	
+	private static MailDAO instance = new MailDAO();
+
+	private MailDAO() {
+
+	}
+
+	public static MailDAO getInstance() {
+		return instance;
 	}
 	
-//	public List<MailVO> selectList(Map<String, Object> map){
 	public List<MailVO> findAll(Map<String, Object> map){
 		List<MailVO> list = new ArrayList<MailVO>();
 		
@@ -54,14 +63,11 @@ public class MailDAO extends DBConnPool{
 			}
 			query += " ORDER BY idx DESC";
 		}
-//		System.out.println(query);
 		
 		try{
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, status);
 			rs = psmt.executeQuery();
-			
-//			System.out.println(query);
 			
 			while(rs.next()) {
 				MailVO vo = new MailVO();
@@ -81,8 +87,22 @@ public class MailDAO extends DBConnPool{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
 			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return list;
 	}
 	
@@ -113,8 +133,22 @@ public class MailDAO extends DBConnPool{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return vo;
 	}
 	
@@ -138,6 +172,21 @@ public class MailDAO extends DBConnPool{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return status;
 	}
@@ -155,8 +204,24 @@ public class MailDAO extends DBConnPool{
 				result = rs.getInt("idx");
 				break;
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -180,8 +245,22 @@ public class MailDAO extends DBConnPool{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return result;
 	}
 	
@@ -191,8 +270,6 @@ public class MailDAO extends DBConnPool{
 		String query = "INSERT INTO mail(idx, title, status, senddate, sender, recipients)"
 				+ " VALUES(gw_seq.NEXTVAL, ?, ?, sysdate, ?, ?)";
 		
-//		System.out.println(query);
-		
 		try {
 			psmt = con.prepareStatement(query);
 			
@@ -201,26 +278,31 @@ public class MailDAO extends DBConnPool{
 			psmt.setString(3, vo.getSender());
 			psmt.setString(4, vo.getRecipients());
 			
-//			System.out.println(query);
-
 			result = psmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return result;
 	}
 	
 	public int update(MailVO vo) {
 		int result = 0;
-		
-//		System.out.println("dao title : " + vo.getTitle());
-//		System.out.println("dao content : " + vo.getContent());
-//		System.out.println("dao status : " + vo.getStatus());
-//		System.out.println("dao sender : " + vo.getSender());
-//		System.out.println("dao recipients : " + vo.getRecipients());
-//		System.out.println("dao idx : " + vo.getIdx());
 		
 		String query = "UPDATE mail"
 				+ " SET title=?, content=?, status=?, senddate=SYSDATE, sender=?, recipients=?"
@@ -236,12 +318,25 @@ public class MailDAO extends DBConnPool{
 			psmt.setString(5, vo.getRecipients());
 			psmt.setInt(6, vo.getIdx());
 			
-//			System.out.println(query);
-			
 			result = psmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -280,11 +375,25 @@ public class MailDAO extends DBConnPool{
 				psmt.setInt(5, vo.getIdx());
 			}
 			
-			
 			result = psmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -306,8 +415,22 @@ public class MailDAO extends DBConnPool{
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		return result;
 	}
 	
@@ -322,6 +445,20 @@ public class MailDAO extends DBConnPool{
 			result = psmt.executeUpdate();
 		}catch(Exception e) {
 			
+		}finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}

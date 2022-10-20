@@ -19,8 +19,8 @@ request.setCharacterEncoding("utf-8");
 Map<String, Object> map = new HashMap<String, Object>();
 
 // 세션 영역의 user_id로 user_code를 구해서 map.put();
-UserInfoDAO uDao = new UserInfoDAO();
-// String user_id = session.getAttribute("user_id").toString();
+// UserInfoDAO uDao = new UserInfoDAO();
+UserInfoDAO uDao = UserInfoDAO.getInstance();
 String user_id = "";
 if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
 	user_id = session.getAttribute("user_id").toString();
@@ -31,13 +31,12 @@ int user_code = uVo.getUser_code();
 map.put("user_code", user_code);
 
 // 검색어, status 구해서 map.put(); 
-MailDAO dao = new MailDAO();
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 
 String searchField = request.getParameter("searchField");
 String searchWord = request.getParameter("searchWord");
 String status = request.getParameter("status");
-
-// System.out.println("status : " + status);
 
 map.put("status", status);
 
@@ -47,7 +46,7 @@ if (searchWord != null) {
 }
 
 List<MailVO> list = dao.findAll(map);
-dao.close();
+// dao.close();
 %>
 <!DOCTYPE html>
 <html>

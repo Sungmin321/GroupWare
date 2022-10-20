@@ -1,11 +1,11 @@
 <%@page import="mail.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <% 
 request.setCharacterEncoding("utf-8");
 
 int status = Integer.parseInt(request.getParameter("status"));
-// System.out.println("Edit Status Process 페이지 status : " + status);
 
 String[] arr = request.getParameter("chk_value").split(","); // idx 
 
@@ -14,15 +14,13 @@ int[] statusArr = new int[arr.length];
 int[] chk_value = new int[arr.length];
 for(int i=0; i<arr.length; i++){
 	chk_value[i] = Integer.parseInt(arr[i]);
-// 	System.out.println("chk_value[" + i + "] : " + chk_value[i]);
 }
 
-MailDAO dao = new MailDAO();
-
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
 
 for(int i=0; i<statusArr.length; i++){
 	statusArr[i] = dao.getStatus(chk_value[i]);
-// 	System.out.println("statusArr[" + i + "] : " + statusArr[i]);
 }
 
 int result = 0;
@@ -33,7 +31,7 @@ for(int i=0; i<chk_value.length; i++){
 		break;
 	}
 }
-dao.close();
+// dao.close();
 
 if(result == 1){
 %>

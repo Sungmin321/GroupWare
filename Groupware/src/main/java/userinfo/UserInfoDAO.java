@@ -7,18 +7,18 @@ import java.util.Map;
 import dbcon.DBConnPool;
 
 public class UserInfoDAO extends DBConnPool {
-//	private static UserInfoDAO instance = new UserInfoDAO();
-//
-//	private UserInfoDAO() {
+//	public UserInfoDAO() {
 //		super();
 //	}
-//
-//	public static UserInfoDAO getInstance() {
-//		return instance;
-//	}
 	
-	public UserInfoDAO() {
-		super();
+	private static UserInfoDAO instance = new UserInfoDAO();
+
+	private UserInfoDAO() {
+
+	}
+
+	public static UserInfoDAO getInstance() {
+		return instance;
 	}
 	
 	public UserInfoKorVO getUserInfoVO(String user_id, String user_pw) {
@@ -50,17 +50,19 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
 				}
-				if(rs != null) {
+				if (rs != null) {
 					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return vo;
 	}
 	
@@ -88,21 +90,22 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
 				}
-				if(rs != null) {
+				if (rs != null) {
 					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return vo;
 	}
 	
-//	public List<UserInfoKorVO> selectList(Map<String, Object> map){
 	public List<UserInfoKorVO> findAll(Map<String, Object> map){
 		List<UserInfoKorVO> list = new ArrayList<UserInfoKorVO>();
 		
@@ -114,8 +117,6 @@ public class UserInfoDAO extends DBConnPool {
 			query += " AND " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
 		}
 		query += " ORDER BY user_name";
-		
-//		System.out.println(query);
 		
 		try {
 			stmt = con.createStatement();
@@ -139,21 +140,22 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(stmt != null) {
+				if (stmt != null) {
 					stmt.close();
 				}
-				if(rs != null) {
+				if (psmt != null) {
+					psmt.close();
+				}
+				if (rs != null) {
 					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return list;
 	}
 	
-//	public int insert(UserInfoVO vo) {
 	public int addStaff(UserInfoVO vo) {
 		int result = 0;
 		
@@ -178,18 +180,22 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
-//	public int insertIdNull(UserInfoVO vo) {
 	public int addStaffIdNull(UserInfoVO vo) {
 		int result = 0;
 		
@@ -213,26 +219,28 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
-//	public int update(UserInfoVO vo) {
 	public int modifyStaff(UserInfoVO vo) {
 		int result = 0;
 		
 		String query = "UPDATE userinfo"
 				+ " SET user_code = ?, user_name = ?, user_id = ?, user_pw = ?, dept_id = ?, pos_id = ?, res_id = ?"
 				+ " WHERE user_code = ?";
-		
-//		System.out.println(query);
 		
 		try {
 			psmt = con.prepareStatement(query);
@@ -253,20 +261,22 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
-//		System.out.println(query);
-		
 		return result;
 	}
 	
-//	public int updateIdNull(UserInfoVO vo) {
 	public int modifyStaffIdNull(UserInfoVO vo) {
 		int result = 0;
 		
@@ -294,14 +304,19 @@ public class UserInfoDAO extends DBConnPool {
 			
 		}finally {
 			try {
-				if(psmt != null) {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (psmt != null) {
 					psmt.close();
+				}
+				if (rs != null) {
+					rs.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	

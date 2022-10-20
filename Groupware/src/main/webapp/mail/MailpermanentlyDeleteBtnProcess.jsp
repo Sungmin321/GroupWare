@@ -2,6 +2,7 @@
 <%@page import="mail.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <% 
 request.setCharacterEncoding("utf-8");
 
@@ -20,8 +21,10 @@ for(int i=0; i<arr.length; i++){
 
 int result = 0;
 
-MailDAO dao = new MailDAO();
-AttachedFileDAO fDao = new AttachedFileDAO();
+// MailDAO dao = new MailDAO();
+MailDAO dao = MailDAO.getInstance();
+// AttachedFileDAO fDao = new AttachedFileDAO();
+AttachedFileDAO fDao = AttachedFileDAO.getInstance();
 
 for(int i=0; i<chk_value.length; i++){
 	result = dao.delete(chk_value[i]);
@@ -30,8 +33,8 @@ for(int i=0; i<chk_value.length; i++){
 		break;
 	}
 }
-dao.close();
-fDao.close();
+// dao.close();
+// fDao.close();
 
 if(result == 1){
 %>

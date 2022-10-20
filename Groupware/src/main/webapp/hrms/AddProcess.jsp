@@ -2,6 +2,7 @@
 <%@page import="userinfo.UserInfoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../Login/IsLoggedIn.jsp" %>
 <%
 String user_name = request.getParameter("user_name");
 String user_id = request.getParameter("user_id");
@@ -20,8 +21,8 @@ vo.setDept_id(dept_id);
 vo.setPos_id(pos_id);
 vo.setRes_id(res_id);
 
-// UserInfoDAO dao = UserInfoDAO.getInstance();
-UserInfoDAO dao = new UserInfoDAO();
+// UserInfoDAO dao = new UserInfoDAO();
+UserInfoDAO dao = UserInfoDAO.getInstance();
 
 int result;
 
@@ -31,7 +32,7 @@ if(res_id != 0){ // 직책이 있을때
 	result = dao.addStaffIdNull(vo);
 }
 
-dao.close();
+// dao.close();
 
 if(result == 1){
 %>	
@@ -40,7 +41,6 @@ if(result == 1){
 		location.href='List.jsp';
 	</script>
 <% 
-// 	response.sendRedirect("List.jsp");
 }else{
 %>
 	<script>

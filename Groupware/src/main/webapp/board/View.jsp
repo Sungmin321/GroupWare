@@ -28,7 +28,8 @@
 	
 		String idx = request.getParameter("idx"); // 게시물 찾아올때 쓸 idx 
 		String number = request.getParameter("i"); // 글번호
-		AttachedFileDAO dao = new AttachedFileDAO();
+// 		AttachedFileDAO dao = new AttachedFileDAO();
+		AttachedFileDAO dao = AttachedFileDAO.getInstance();
 		AttachedFileVO fVo = dao.selectView(Integer.parseInt(idx));
 	
 	BoardVO vo = bdao.ViewBoard(idx);
