@@ -9,6 +9,8 @@
 <%@ include file="../Login/IsLoggedIn.jsp" %>
 <%@ include file="CheckDept.jsp" %>
 <%
+request.setCharacterEncoding("utf-8");
+
 // UserInfoDAO dao = new UserInfoDAO();
 UserInfoDAO dao = UserInfoDAO.getInstance();
 Map<String, Object> map = new HashMap<String, Object>();

@@ -4,6 +4,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../Login/IsLoggedIn.jsp" %>
 <%
+request.setCharacterEncoding("utf-8");
+
 String user_name = request.getParameter("user_name");
 String user_id = request.getParameter("user_id");
 String user_pw = request.getParameter("user_pw");

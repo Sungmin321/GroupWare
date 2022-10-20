@@ -9,6 +9,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../Login/IsLoggedIn.jsp" %>
 <%
+request.setCharacterEncoding("utf-8");
+
 // DeptPosResDAO dao = new DeptPosResDAO();
 DeptPosResDAO dao = DeptPosResDAO.getInstance();
 List<DeptPosResVO> list = new ArrayList<DeptPosResVO>();

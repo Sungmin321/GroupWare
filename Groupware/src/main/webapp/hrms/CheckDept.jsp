@@ -11,6 +11,8 @@
 </head>
 <body>
 <%
+request.setCharacterEncoding("utf-8");
+
 if(session.getAttribute("user_id") != null && !session.getAttribute("user_id").equals("null")){
 // 	UserInfoDAO dao = new UserInfoDAO();
 	UserInfoDAO dao = UserInfoDAO.getInstance();
