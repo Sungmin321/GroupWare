@@ -50,7 +50,7 @@ public class MailDAO extends DBConnPool{
 			}
 			query += " ORDER BY idx DESC";
 
-		} else if (status.equals("5")) { // 휴지통
+		} else if (status.equals("5")) { // 휴지통 (보낸메일함 -> 휴지통 or 받은메일함 -> 휴지통)
 			query += " AND ("
 					+ " (status = ? AND sender = '" + user_code + "')"
 					+ " OR"

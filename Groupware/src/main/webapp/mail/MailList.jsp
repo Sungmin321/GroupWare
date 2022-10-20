@@ -244,24 +244,53 @@ if(list.isEmpty()){
 <%
 }else{
 	for(MailVO vo : list){
+		// 체크박스
 %>		
 		<tr>
 			<td align="center">
 				<input type="checkbox" name="check[]" value="<%= vo.getIdx() %>"/>
 			</td>
+<%
+		// 보낸이
+		if(vo.getStatus() == 1){
+%>
+			<td align="center"><b><%= vo.getUser_name() %><<%= vo.getSender() %>></b></td>
+<%
+		}else{
+%>
 			<td align="center"><%= vo.getUser_name() %><<%= vo.getSender() %>></td>
 <%
+		}
+
+		// 제목
 		if(status.equals("4")){			
 %>
 			<td align="center"><a href="MailWrite.jsp?idx=<%= vo.getIdx() %>&status=<%= request.getParameter("status") %>"><%= vo.getTitle() %></a></td>
 <%
 		}else{
+			if(vo.getStatus() == 1){
+%>
+			<td align="center"><b><a href="MailView.jsp?idx=<%= vo.getIdx() %>&status=<%= request.getParameter("status") %>"><%= vo.getTitle() %></a></b></td>
+<%
+			}else{
 %>
 			<td align="center"><a href="MailView.jsp?idx=<%= vo.getIdx() %>&status=<%= request.getParameter("status") %>"><%= vo.getTitle() %></a></td>
 <% 
+			}
 		}
+		
+		// 보낸 날짜
+		if(vo.getStatus() == 1){
 %>			
+			<td align="center"><b><%= vo.getSenddate() %></b></td>
+
+<%
+		}else{
+%>
 			<td align="center"><%= vo.getSenddate() %></td>
+<%
+		}
+%>
 		</tr>	
 <%
 	}
