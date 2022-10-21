@@ -50,6 +50,11 @@ case "3" :
 	break;
 }
 
+String v1 = "";
+if(request.getAttribute("v1") != null){
+	v1 = request.getAttribute("v1").toString();
+}
+System.out.println("v1 : " + v1);
 %>
 
 <!DOCTYPE html>
@@ -58,6 +63,19 @@ case "3" :
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var v1 = "<%= v1 %>";
+	
+	if(v1 != ""){
+		$('#submitBtn1').hide();
+		$('#submitBtn2').hide();
+	}
+};
+</script>
+
 </head>
 <body>
 	<table class="table table-hover" width="90%" align="center">
@@ -165,14 +183,14 @@ case "3" :
 		<tr align="center">
 			<th width="40%" style="border-bottom:none;">
 				<form action="EdmsApprovalProcess.jsp" method="post">
-					<input type="submit" class="btn btn-primary" style="width:100%;height:100%;" value="승인">
+					<input type="submit" class="btn btn-primary" id="submitBtn1" style="width:100%;height:100%;" value="승인">
 					<input type="hidden" name="idx" value="<%= idx %>">
 					<input type="hidden" name="i" value="<%= number %>">
 				</form>
 			</th>
 			<th width="40%" style="border-bottom:none;">
 				<form action="EdmsReferProcess.jsp" method="post">
-					<input type="submit" class="btn btn-primary" style="width:100%;height:100%;" value="반려">
+					<input type="submit" class="btn btn-primary" id="submitBtn2" style="width:100%;height:100%;" value="반려">
 					<input type="hidden" name="idx" value="<%= idx %>">
 					<input type="hidden" name="i" value="<%= number %>">
 				</form>

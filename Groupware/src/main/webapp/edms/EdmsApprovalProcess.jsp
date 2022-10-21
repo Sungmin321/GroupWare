@@ -22,5 +22,7 @@ if (result==1){
 	<%	
 	}
 
+String value = "value";
+request.setAttribute("v1", value); // view.jsp에서 승인/반려 버튼을 숨기기 위해 저장
 request.getRequestDispatcher("EdmsApprovalWaitingView.jsp").forward(request, response);
 %>
