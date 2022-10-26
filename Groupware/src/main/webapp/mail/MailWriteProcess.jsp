@@ -192,7 +192,9 @@ if(ofile != null){
 		//
 		
 		File oldFile = new File(saveDirectory + File.separator + ofile);
+		System.out.println("oldFile : " + oldFile);
 		File newFile = new File(saveDirectory + File.separator + sfile);
+		System.out.println("newFile : " + newFile);
 		oldFile.renameTo(newFile);
 
 		// 조건 2 (idx 1 or idx 3 or idx 4)
@@ -227,7 +229,9 @@ if(ofile != null){
 			String sfile = fileIdx + ext; // 새로운 파일 이름("idx.확장자")
 			
 			File oldFile = new File(saveDirectory + File.separator + ofile);
+			System.out.println("ofile : " + ofile);
 			File newFile = new File(saveDirectory + File.separator + sfile);
+			System.out.println("sfile : " + sfile);
 			oldFile.renameTo(newFile);
 
 			fVo.setIdx(fileIdx);

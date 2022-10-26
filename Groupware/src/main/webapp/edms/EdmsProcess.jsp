@@ -12,7 +12,8 @@
 	request.setCharacterEncoding("utf-8");
 	response.setContentType("text/html;charset=utf-8");
 	
-	String saveDirectory = application.getRealPath("/Uploads");
+// 	String saveDirectory = application.getRealPath("/Uploads");
+	String saveDirectory = "C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/ROOT/Uploads";
 	
 	int maxPostSize = 1024 * 1000 * 10; // 10MB
 	String encoding = "UTF-8";
